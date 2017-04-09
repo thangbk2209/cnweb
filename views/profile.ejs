@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Books Trading Club</title>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <!-- <script src="/socket.io/socket.io.js"></script> -->
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+</head>
+  </head>
+  <style type="text/css">
+      .main_menu>ul>li{
+          text-decoration: none;
+          list-style: none;
+          float:left;
+
+      }
+      .main_menu{
+        background: #DDDDDD;
+        padding-bottom: 5px;
+        height: 40px;
+        margin-top: 5px;
+      }
+      .location{
+        width: 400px;
+        height: 30px;
+      }
+      .footer {
+          margin-top: 20px;
+          padding-top: 50px;
+          color: #777;
+          border-top: 1px solid #e5e5e5;
+      }
+      .myBody{
+        margin-top: 30px;
+      }
+      .Update{
+        width: 20%;
+      }
+  </style>
+  <body>
+    <div class="col-md-10 col-md-offset-1">
+        <nav class="navbar navbar-default" style="background-color:white">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <b class="active"><a class="navbar-brand" href="/">Books Trading Club</a></b>
+
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+        <%if(login == false){%>
+          <li><a href="/users/login">Login</a></li>
+          <li><a href="/users/signup">Sign up</a></li>
+          
+          <%}else{%>
+          <li><a href="/">All Books</a></li>
+          <li><a href="/">My Books</a></li>
+          <li><a href="/users/profile"><i class="gly glyphicon glyphicon-cog"></i></a></li>
+          <li><a href="/users/logout">Log out</a></li>
+          <%}%>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="myBody">
+    <!-- <div class="col-md-10 col-md-offset-1"> -->
+      <label><h1>Update Profile</h1></label>
+            <form action="/users/updateProfile" method="post">
+                 <div class="form-group">
+                  <div class="form-group">
+                      <label >Full name</label>
+                      <input type="text" class="form-control" name="fullName" placeholder='Full name' value = ""/>
+                  </div>
+                      <label >City</label>
+                      <input type="text" name="city" class="form-control" placeholder="City" value="" />
+                  </div>
+                  <div class="form-group">
+                      <label >Age</label>
+                      <input type="text" class="form-control" name="age" placeholder='Age' value = ""/>
+                  </div>
+                  <div class="form-group">
+                      <label >Job</label>
+                      <input type="text" class="form-control" name="job" placeholder='job' value = ""/>
+                  </div>
+          
+                  <div>
+                      <input type="submit" class=" form-control btn-info Update" value="Submit" />
+                  </div>
+            </form>
+    <label><h1>Change Password</h1></label>
+    <form action="/users/changePassword" method = "post">
+        <div class="form-group">
+            <label>Current Password</label>
+            <input type="password" name="currentPassword" class="form-control" placeholder="Current Password"></input>
+          </div>
+        <div class="form-group">
+          <label>New Password</label>
+          <input type="password" name="newPassword" class="form-control" placeholder="New Password"></input>
+        </div>
+        <div>
+            <input type="submit" class=" form-control btn-info Update" value="Save Changes" />
+        </div>
+      
+    </form>
+  </div>
+      <div class="myFooter">  
+               
+          <div class="footer text-center">
+            <p>&copy; 2017 Web assignment</p>
+          </div> 
+      </div>
+    </div>
+     <script type="text/javascript">
+     </script>
+  </body>
+  
+    
+</html>

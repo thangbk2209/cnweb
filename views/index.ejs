@@ -1,0 +1,116 @@
+
+    <meta charset="utf-8">
+    <title>Nền tảng chia sẻ kiến thức cho sinh viên</title>
+    
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <link href="stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="stylesheets/landing-page.css" rel="stylesheet">
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+        <div class="container topnav">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand topnav" href="#"><h4>CN WEB</h4></a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <%if(login == false){%>
+                      <li><a href="/users/login">Login</a></li>
+                      <li><a href="/users/signup">Sign up</a></li>
+                      
+                      <%}else{%>
+                      <li><a href="/users/">Your wall</a></li>
+                      <li><a href="/users/write">Write</a></li>
+                      <li><a href="/users/profile"><i class=" glyphicons glyphicons-cogwheel"></i></a></li>
+                      <li><a href="/users/logout">Log out</a></li>
+                      <%}%>
+
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+     <!-- Header -->
+        <a name="about"></a>
+        <div class="intro-header">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="intro-message">
+                            <h1>CN WEB</h1>
+                            <h3>Chia sẻ kiến thức lập trình</h3>
+                            <hr class="intro-divider">
+                            <ul class="list-inline intro-social-buttons">
+                                <li>
+                                    <a href="https://twitter.com/SBootstrap" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/IronSummitMedia/startbootstrap" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="btn btn-default btn-lg"><i class="fa fa-linkedin fa-fw"></i> <span class="network-name">Linkedin</span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+            <!-- /.container -->
+       <div class="container">
+                <h2>Các chủ đề công nghệ mới nhất </h2>
+                <table class="text-left">
+                    <tr>
+                        
+                        <th><a href=""><img src="images/js2.png"></a><h4>Ngôn ngữ java</h4></th>
+                        <th><a href=""><img src="images/python.png"></a><h4>Python</h4></th>
+                        <th><a href=""><img src="images/html2.png"></a><h4>HTML/HTML5</h4></th>
+                       
+                        
+                    </tr>
+                    <tr>
+                       
+                        <td>Java là một Ngôn ngữ lập trình và là một Platform. Ngôn ngữ lập trình: Java là một ngôn ngữ lập trình có tính bảo mật cao, hướng đối tượng, bậc cao và mạnh mẽ. Platform: Bất cứ môi trường phần cứng hoặc phần mền nào mà trong đó một chương trình chạy, thì được biết đến như là một Platform.</td>
+                        <td>Python là một ngôn ngữ lập trình thông dịch do Guido van Rossum tạo ra năm 1990. Python hoàn toàn tạo kiểu động và dùng cơ chế cấp phát bộ nhớ tự động; do vậy nó tương tự như Perl, Ruby, Scheme, Smalltalk, và Tcl. Python được phát triển trong một dự án mã mở, do tổ chức phi lợi nhuận Python Software Foundation quản lý.</td>
+                        <td>HTML là chữ viết tắt của Hypertext Markup Language, là ngôn ngữ được sử dụng rộng rãi nhất để viết các trang Web. Hypertext là cách mà các trang Web (các tài liệu HTML) được kết nối với nhau. Và như thế, đường link có trên trang Web được gọi là Hypertext.</td>
+                       
+                    </tr>
+                    <tr>
+                        <th><a href=""><img src="images/ajax.png"></a><h4>Ajax</h4></th>
+                        
+                       <th><a href=""><img src="images/jsc2.png"></a><h4>Javascript</h4></th>
+                        <th><a href=""><img src="images/ruby.png"></a><h4>Ruby on Rails</h4></th>
+                        
+                       
+                    </tr>
+                    <tr>
+                        <td>AJAX, là viết tắt của Asynchronous JavaScript and XML, (tạm dịch là JavaScript và XML không đồng bộ), là một kỹ thuật mới để tạo các ứng dụng web giàu tính tương tác, nhimages hơn và mượt mà hơn với sự giúp đỡ của XML, HTML, CSS và JavaScript. AJAX không phải là ngôn ngữ lập trình mới.</td>
+                        
+                        <td>JavaScript là một ngôn ngữ lập trình của HTML và WEB. Nó là nhẹ và được sử dụng phổ biến nhất như là một phần của các trang web, mà sự thi hành của chúng cho phép Client-Side script tương tác với người sử dụng và tạo các trang web động. Nó là một ngôn ngữ chương trình thông dịch với các khả năng hướng đối tượng.</td>
+                        
+                        <td>Ruby on Rails là một khung làm việc (web framework) được viết trên ngôn ngữ lập trình Ruby và được sử dụng trong việc xây dựng và phát triển các ứng dụng web. Phiên bản đầu tiên của Ruby on Rails được giới thiệu ra cộng đồng vào năm 2015.</td>
+                       
+                    </tr>
+                </table>
+            </div>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+
+</body>
