@@ -6,16 +6,31 @@ var userSchema=mongoose.Schema({
     email:String,
     password:String,
   },
+  facebook: {
+    id: String,
+    token: String,
+    email: String,
+    name: String,
+    username: String,
+  },
+  twitter: {
+    id: String,
+    token: String,
+    displayName: String,
+    username: String,
+  },
   profile:{
     fullName: String,
     age: Number,
     city: String,
     job: String,
+    avatar: String,
     words:[{
       title: String
     }],
     following:[{
       id: mongoose.Schema.Types.ObjectId,
+      avatar: String,
       name: String
     }
     ]

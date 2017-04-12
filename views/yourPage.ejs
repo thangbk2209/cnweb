@@ -46,24 +46,8 @@
     </nav>
         <div class="intro-header myBody">
             <div class="container">
-
-                <div class="text-center" ng-app = "upLoad" ng-controller = "up-load">
-                    <h1><span class="fa fa-sign-in"></span> Report</h1>
-                    <hr>
-                    <form action="/users/upLoad" method="post" name="" >
-                         <div class="form-group">   
-                              <label>Title</label>     
-                               <input type="text" name="title" class="form-control" ng-model="title" placeholder="Title"/>
-                               
-                        </div>
-                        <div class="form-group">
-                            <label>Content</label>
-                            <input type="text" class="form-control" name="content" ng-model="content" placeholder="Content"/>
-                        </div>
-                            <button type="Submit" class="btn btn-info" >Upload</button>
-                    </form>
-                </div>
-
+            <label>User name:</label>
+            <div><%= user.profile.fullName %></div>
             </div>
         </div>
     <!-- jQuery -->

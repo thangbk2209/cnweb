@@ -1,16 +1,26 @@
 
 var express = require('express');
 var passport=require('passport');
-var user = require('../models/user.js');
+var User = require('../models/user.js');
 var Word = require('../models/word.js');
 var router = express.Router();
 // login=false;
 /* GET users listing. */
-router.get('/',isLoggedIn, function(req, res, next) {
-  res.render('index',{message:req.flash('loginMessage')});
+router.get('/', function(req, res, next) {
+  // console.log(req.user.profile.fullName);
+  res.render('index.ejs',{message:req.flash('loginMessage')});
+  
+});
+router.get('/posts',isLoggedIn, function(req, res, next) {
+  Word.find({},function(err,data){
+      console.log(data);
+      res.render('posts.ejs',{message:req.flash('loginMessage'), user: req.user, posts:data});
+  });
+  
 });
 
 router.get('/login',function(req,res,next){
+
   res.render('login.ejs',{message:req.flash('loginMessage')});
 });
 
@@ -21,15 +31,28 @@ router.get('/signup',function(req,res){
 router.get('/profile',isLoggedIn,function(req,res){
   res.render('profile.ejs');
 });
-router.get('/write',isLoggedIn, function(req, res, next) {
-  res.render('write.ejs');
-});
 
-router.get('/logout',isLoggedIn,function(req,res){
+router.get('/write',isLoggedIn, function(req, res, next) {
+  res.render('write.ejs', {user: req.user});
+});
+router.get('/logout',function(req,res){
+  console.log('log out');
   req.logout();
   login=false;
   res.redirect('/users');
 });
+router.get('/:username',isLoggedIn,function(req,res,next){
+  var username = req.params.username;
+    console.log('aaa');
+    User.findOne({'profile.fullName': username},function(err,data){
+      console.log('linf');
+      if(err) console.log(err);
+      // console.log(data.profile);
+      res.render('yourPage.ejs',{user: data});
+    })
+ 
+});
+
 router.post('/upLoad',function(req,res){
   console.log(req.body);
   console.log(req.user.local.email);
@@ -53,7 +76,7 @@ router.post('/updateProfile',isLoggedIn,function(req,res){
   console.log(city);
   console.log(age);
   console.log(req.user.local.email);
-  user.findOne({'local.email':req.user.local.email},function(err,result){
+  User.findOne({'local.email':req.user.local.email},function(err,result){
    
     if(err) throw err;
     console.log(result.local);
@@ -75,7 +98,7 @@ router.post('/changePassword',isLoggedIn,function(req,res){
   console.log(currentPassword);
   console.log(newPassword);
   console.log(req.user.local.email);
-  user.findOne({'local.email':req.user.local.email},function(err,result){
+  User.findOne({'local.email':req.user.local.email},function(err,result){
    
     if(err) throw err;
     console.log(result.local);
@@ -107,7 +130,7 @@ router.post('/signup',passport.authenticate('local-signup',{
 }));
 
 router.post('/login',passport.authenticate('local-login',{
-  successRedirect: '/users',
+  successRedirect: '/users/posts',
   failureRedirect: '/users/login',
   failureFlash: true,
 }))
