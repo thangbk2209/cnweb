@@ -22,6 +22,7 @@ mongoose.connect(configDB.url);
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var posts = require('./routes/posts');
 
 var port = process.env.PORT || 8081; 
 
@@ -32,7 +33,7 @@ require('./config/passport')(passport);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.engine('ejs', require('ejs').renderFile);
+// app.engine('ejs', require('ejs').renderFile);
 app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
@@ -50,6 +51,7 @@ app.use(flash());
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/posts', posts);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

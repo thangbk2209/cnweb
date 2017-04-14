@@ -1,25 +1,42 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>Nền tảng chia sẻ kiến thức cho sinh viên</title>
-    <link href="stylesheets/landing-page.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-    <link href="stylesheets/bootstrap.min.css" rel="stylesheet">
+<html lang="en">
 
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-</head>
-<style type="text/css">
-    .myBody{
-        margin-top: 50px;
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Bare - Start Bootstrap Template</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Custom CSS -->
+    <style>
+    body {
+        padding-top: 70px;
+        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
     }
-</style>
+    </style>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
 <body>
 
     <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
-        <div class="container topnav">
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -28,43 +45,74 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand topnav" href="/users/posts"><h4>CN WEB</h4></a>
+                <a class="navbar-brand" href="/">TTNT</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                      <li><a href="/users/<%=user.profile.fullName%>"><%=user.profile.fullName%></a></li>
-                      <li><a href="/users/write">Write</a></li>
-                      <!-- <li><a href="/users/profile"><i class=" glyphicons glyphicons-cogwheel"></i></a></li> -->
-                      <li><a href="/users/logout">Log out</a></li>
-
+                     <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/users/<%=reqUser.profile.userName%>"><%=reqUser.profile.userName%></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/users/write"> Viết bài</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/users/logout">Đăng xuất</a>
+                    </li>
+                    
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->
     </nav>
-        <div class="intro-header myBody">
-            <div class="container">
+    <!-- Page Content -->
+    <div class="container">
 
-                <ul class="list-group">
-                    <% for(var i = 0; i < posts.length; i++ ){ %>
-                        <li class="list-group-item list-group-item-info">
-                            <a href="/posts/<%= posts[i].id %>"><%= posts[i].title %><a>
-                            <a href="/posts/<%= posts[i].user %>" class="btn btn-danger">Delete</a>
+    </div>
+    <section id="">
+        <div class="container">
+            <ul class="">
+                <% for(var i = 0; i < posts.length; i++ ){ %>
+                    <li class="list-group-item list-group-item-info">
+                        <a href="/posts/<%= posts[i].id %>"><%= posts[i].title %><a>
+                        <a href="/users/<%= posts[i].owner %>" class=""></a>
+                        <a href="/posts/<%= posts[i].owner %>" class=""></a>
+                    </li>
+                <% } %>
+            </ul>
+        </div>
+    </section>
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <span class="copyright">Copyright &copy; TTNT 2017</span>
+                </div>
+                <div class="col-md-6">
+                    <ul class="list-inline social-buttons">
+                        <li><a href="#"><i class="fa fa-twitter"></i></a>
                         </li>
-                    <% } %>
-                </ul>
-
+                        <li><a href="#"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
-    <!-- jQuery -->
-   
+    </footer>
+    <!-- /.container -->
 
-    <script src="js/jquery.js"></script>
-    <script type="text/javascript">
-    </script>
+    <!-- jQuery Version 1.11.1 -->
+    <script src="../js/jquery.js"></script>
 
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../js/bootstrap.min.js"></script>
 
 </body>
+
 </html>

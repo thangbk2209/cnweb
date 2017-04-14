@@ -11,10 +11,10 @@ router.get('/', function(req, res, next) {
   res.render('index.ejs',{message:req.flash('loginMessage')});
   
 });
-router.get('/posts',isLoggedIn, function(req, res, next) {
+router.get('/posts', function(req, res, next) {
   Word.find({},function(err,data){
       console.log(data);
-      res.render('posts.ejs',{message:req.flash('loginMessage'), user: req.user, posts:data});
+      res.render('posts.ejs',{message:req.flash('loginMessage'), reqUser: req.user, posts:data});
   });
   
 });
@@ -29,11 +29,11 @@ router.get('/signup',function(req,res){
 });
 
 router.get('/profile',isLoggedIn,function(req,res){
-  res.render('profile.ejs');
+  res.render('profile.ejs',{message:req.flash('loginMessage'), reqUser: req.user});
 });
 
 router.get('/write',isLoggedIn, function(req, res, next) {
-  res.render('write.ejs', {user: req.user});
+  res.render('write.ejs', {reqUser: req.user});
 });
 router.get('/logout',function(req,res){
   console.log('log out');
@@ -42,54 +42,62 @@ router.get('/logout',function(req,res){
   res.redirect('/users');
 });
 router.get('/:username',isLoggedIn,function(req,res,next){
+  console.log(req.user.local.email);
   var username = req.params.username;
     console.log('aaa');
-    User.findOne({'profile.fullName': username},function(err,data){
-      console.log('linf');
+    User.findOne({'profile.userName': username},function(err,data){
       if(err) console.log(err);
+      console.log(data);
+      Word.find({'owner': data.local.email},function(err,docs){
+        console.log(docs);
+        res.render('yourPage.ejs',{reqUser:req.user,user: data, docs:docs});
+      })
       // console.log(data.profile);
-      res.render('yourPage.ejs',{user: data});
+      
     })
  
 });
 
 router.post('/upLoad',function(req,res){
   console.log(req.body);
+  console.log(req.user);
   console.log(req.user.local.email);
   var newWord = new Word();
     newWord.title = req.body.title;
     newWord.content = req.body.content;
-    newWord.owner = req.user.local.email;
+    newWord.owner = req.user.profile.fullName;
     newWord.soLike = 0;
     newWord.save(function(err) {
             if (err)
               throw err;
           });
-  res.redirect('/users');
+  res.redirect('/users/'+req.user.profile.userName);
 })
 router.post('/updateProfile',isLoggedIn,function(req,res){
    console.log("data :" + req.body);
   var city = req.body.city;
   var age = req.body.age;
   var job = req.body.job;
-  var fullName = req.body.fullName;
+  var userName = req.body.userName;
+  var avatar = req.body.avatar;
   console.log(city);
   console.log(age);
   console.log(req.user.local.email);
   User.findOne({'local.email':req.user.local.email},function(err,result){
    
     if(err) throw err;
-    console.log(result.local);
+    console.log(result);
       result.profile.city = city;
       result.profile.age = age;
-      result.profile.fullName = fullName;
+      result.profile.userName = userName;
       result.profile.job = job;
+      result.profile.avatar = avatar;
       result.save(function(err){
          if(err) throw err;
          console.log("luu du lieu thanh cong");
        });
   });
-  res.redirect('/users');
+  res.redirect('/users/'+req.user.profile.userName);
 })
 
 router.post('/changePassword',isLoggedIn,function(req,res){

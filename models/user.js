@@ -20,11 +20,11 @@ var userSchema=mongoose.Schema({
     username: String,
   },
   profile:{
-    fullName: String,
+    userName: String,
+    avatar: String,
     age: Number,
     city: String,
     job: String,
-    avatar: String,
     words:[{
       title: String
     }],
