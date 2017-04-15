@@ -42,7 +42,11 @@ router.get('/logout',function(req,res){
   res.redirect('/users');
 });
 router.get('/:username',isLoggedIn,function(req,res,next){
+<<<<<<< Updated upstream
   console.log(req.user.local.email);
+=======
+    console.log("sddd");
+>>>>>>> Stashed changes
   var username = req.params.username;
     console.log('aaa');
     User.findOne({'profile.userName': username},function(err,data){
@@ -138,6 +142,7 @@ router.post('/signup',passport.authenticate('local-signup',{
 }));
 
 router.post('/login',passport.authenticate('local-login',{
+
   successRedirect: '/users/posts',
   failureRedirect: '/users/login',
   failureFlash: true,
@@ -166,6 +171,11 @@ function isLoggedIn(req,res,next){
   if(req.isAuthenticated()){
     login=true;
     return next();
+  }
+  else if(req.url == '/auth/facebook'){
+  // NOTE: call the function returned to process the request
+    passport.authenticate('facebook')(req, res, next);
+    return;
   }
   res.redirect('/');
 }
