@@ -42,15 +42,6 @@ router.get('/logout',function(req,res){
   res.redirect('/users');
 });
 router.get('/:username',isLoggedIn,function(req,res,next){
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-  console.log(req.user.local.email);
-=======
-    console.log("sddd");
->>>>>>> Stashed changes
-=======
-    console.log("sddd");
->>>>>>> Stashed changes
   var username = req.params.username;
     console.log('aaa');
     User.findOne({'profile.userName': username},function(err,data){
