@@ -21,16 +21,20 @@
         <hr>
          <form action="/users/signup" method="post" name="signupForm" ng-app="">
          <div class="form-group">   
-              <label>Email</label>  
-               <span ng-show="signupForm.email.$error.email">
-                 <div class="alert-danger" style="margin-bottom: 10px;"> Not a valid e-mail address</div>
-              </span>     
-               <input type="email" name="email" class="form-control" ng-model="email" placeholder="email"/>
+            <label>Email</label>  
+              <span ng-show="signupForm.email.$error.email">
+                <div class="alert-danger" style="margin-bottom: 10px;"> Not a valid e-mail address</div>
+            </span>     
+              <input type="email" name="email" class="form-control" ng-model="email" placeholder="email"/>
                
         </div>
         <div class="form-group">
             <label>PassWord</label>
             <input type="password" class="form-control" name="password" ng-model="password" placeholder="password"/>
+        </div>
+        <div class="form-group">
+            <label >Username</label>
+            <input type="text" class="form-control" name="fullname" ng-model="fullname" placeholder="username"/>
         </div>
             <button class="btn btn-info" ng-click="register()" >Sign up</button>
             <hr>
