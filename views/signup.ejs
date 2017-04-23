@@ -3,11 +3,13 @@
   <head>
     <meta charset="utf-8">
     <title>Books Trading Club</title>
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/> -->
+    <link href="../css/style.css" rel="stylesheet">
     <!-- <script src="/socket.io/socket.io.js"></script> -->
+     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 </head>
 
   </head>
@@ -29,12 +31,12 @@
                
         </div>
         <div class="form-group">
-            <label>PassWord</label>
-            <input type="password" class="form-control" name="password" ng-model="password" placeholder="password"/>
-        </div>
-        <div class="form-group">
             <label >Username</label>
             <input type="text" class="form-control" name="fullname" ng-model="fullname" placeholder="username"/>
+        </div>
+        <div class="form-group">
+            <label>PassWord</label>
+            <input type="password" class="form-control" name="password" ng-model="password" placeholder="password"/>
         </div>
             <button class="btn btn-info" ng-click="register()" >Sign up</button>
             <hr>

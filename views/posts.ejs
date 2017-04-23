@@ -9,17 +9,21 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Bare - Start Bootstrap Template</title>
+    <title>TTNT</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="../css/style.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <style>
     body {
         padding-top: 70px;
         /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    }
+    a{
+
     }
     </style>
 
@@ -54,7 +58,7 @@
                         <a href="#page-top"></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="/users/<%=reqUser.profile.userName%>"><%=reqUser.profile.userName%></a>
+                        <a class="page-scroll" href="/users/<%=reqUser.username%>"><%=reqUser.username%></a>
                     </li>
                     <li>
                         <a class="page-scroll" href="/users/write"> Viết bài</a>
@@ -75,15 +79,57 @@
     </div>
     <section id="">
         <div class="container">
-            <ul class="">
-                <% for(var i = 0; i < posts.length; i++ ){ %>
-                    <li class="list-group-item list-group-item-info">
-                        <a href="/posts/<%= posts[i].id %>"><%= posts[i].title %><a>
-                        <a href="/users/<%= posts[i].owner %>" class=""></a>
-                        <a href="/posts/<%= posts[i].owner %>" class=""></a>
-                    </li>
-                <% } %>
-            </ul>
+            <div class="col-md-8">
+                    <ul class="">
+                    <% for(var i = 0; i < posts.length; i++ ){ %>
+                        <li class="list-group-item" style="height:70px;">
+
+                            <div class="col-md-10">
+                                <a href="/posts/<%= posts[i].id %>" style="text-decoration: none;" ><%= posts[i].title %></a>
+                            </div>
+                            <div class="col-md-2">
+                                <table class="text-center">
+                                    <tr>              
+                                        <th><label>  <%= posts[i].soLike %></label></th>
+                                        <th><label> <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> | </label></th>
+
+                                        <th><label> <%= posts[i].soLike %></label></th>  
+                                        <th><label>  <i class="fa fa-bookmark" aria-hidden="true"></i></label></th>  
+                                    </tr>
+                                 </table>
+                            </div>
+                            <div class="col-md-10">
+                                <a href="/users/<%= posts[i].owner %>" style="text-decoration: none;" ><%= posts[i].owner %></a>
+                            </div>
+                        </li>
+                    <% } %>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <div class="col-md-5">
+                    <img class="avatar" src=<%=reqUser.profile.avatar%>>
+                </div>
+                <div class="col-md-7">
+                    <div class="thong_tin_ca_nhan">
+                        <label>User name:</label> <%=reqUser.username%><br>
+                    </div>
+                </div>   
+                <div class="col-md-6 col-md-offset-3  tt_fs">
+                    <table class="text-center">
+                        <tr>
+                            
+                            <th><label>  Following  |  </label></th>
+                            <th><label>  Số bài  </label></th>  
+                        </tr>
+                        <tr>
+                           
+                            <td>  20  </td>
+                            <td> 12</td>   
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
         </div>
     </section>
     <footer>

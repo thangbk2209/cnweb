@@ -46,7 +46,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/users/posts">TTNT</a>
+                <a class="navbar-brand" href="/">TTNT</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -71,35 +71,30 @@
         <!-- /.container -->
     </nav>
     <!-- Page Content -->
-   <section id="">
-        <div class="container"  ng-app="FollowApp" ng-controller="follow">
+
+    <div class="container">
+
+    </div>
+    <section id="">
+        <div class="container">
             <div class="col-md-8">
-                 <ul class="">
-                    <% for(var i = 0; i < docs.length; i++ ){ %>
-                        <li class="list-group-item" style="height:150px;">
+                <center><h3><%= doc.title %></h3></center><br>
+                <div>
+                    <%= doc.content %>
+                </div>
+                <div style="float:right;">
+                    <div class="col-md-3">
+                        <table class="text-center">
+                            <tr>              
+                                <th><label>  <%= doc.soLike %></label></th>
+                                <th><label> <i class="fa fa-thumbs-o-up" aria-hidden="true"></i></label></th>
 
-                            <div class="col-md-10">
-                                <a href="/posts/<%= docs[i].id %>" style="text-decoration: none;" >
-                                    <h3><%= docs[i].title %></h3>
-                                </a>
-                            </div>
-                            <div class="col-md-2" style=" padding-top:25px">
-                                <table class="text-center">
-                                    <tr>              
-                                        <th><label>  <%= docs[i].soLike %></label></th>
-                                        <th><label> <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> | </label></th>
-
-                                        <th><label> <%= docs[i].soLike %></label></th>  
-                                        <th><label>  <i class="fa fa-bookmark" aria-hidden="true"></i></label></th>  
-                                    </tr>
-                                 </table>
-                            </div>
-                            <div class="col-md-10">
-                                <a href="/users/<%= docs[i].owner %>" style="text-decoration: none;" ><%= docs[i].owner %></a>
-                            </div>
-                        </li>
-                    <% } %>
-                </ul>
+                                <th><label> <%= doc.soLike %></label></th>  
+                                <th><label>  <i class="fa fa-bookmark" aria-hidden="true"></i></label></th>  
+                            </tr>
+                         </table>
+                    </div>
+                 </div>
             </div>
             <div class="col-md-4">
                 <div class= row>
@@ -108,10 +103,7 @@
                     </div>
                     <div class="col-md-7">
                         <div class="thong_tin_ca_nhan">
-                            <label>User name:</label> <%=user.username%><br>
-                            <label>Age: </label><%=user.profile.age%><br>
-                            <label>Adress: </label><%=user.profile.city%><br>
-                            <label>Job: </label><%=user.profile.job%>
+                             <a href="/users/<%=user.username%>" style="text-decoration: none;" ><%=user.username%></a>
                         </div>
                     </div> 
                 </div> 
@@ -126,19 +118,9 @@
                             <tr>
                                
                                 <td>  20  </td>
-                                <td>  <%=docs.length%>  </td>   
+                                <td>  5   </td>   
                             </tr>
                         </table>
-                    </div>
-                     <div class="col-md-6">
-                             <%if(check == 1){%>
-                                 <label>
-                                    <a href="/users/profile"><i class="fa fa-cog fa-spin fa-3x fa-fw"></i></a>
-                                </label>
-                          
-                            <%}else{%>
-                                <button class="btn btn-info" ng-click="folow(reqUser.usename,user.username)">Follow</button>
-                            <%}%> 
                     </div>
                 </div>
             </div>
@@ -172,22 +154,6 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="../js/bootstrap.min.js"></script>
-    <script type="text/javascript">
-         var app = angular.module("FollowApp",[]);
-         app.controller("follow",function($scope,$http){
-                $scope.follow = function(reqUser, user){
-                    console.log(reqUser + user );
-                              $http({
-                                method : "POST",
-                                url: "/follow",
-                                data: {reqUser: reqUser, user:user},
-                                headers: {'Content-Type': 'application/json'}
-                              }).then(function(data){
-                                $scope. = data.data;
-                              })
-                });
-         })
-    </script>
 
 </body>
 

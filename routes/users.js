@@ -43,34 +43,42 @@ router.get('/logout',function(req,res){
 });
 router.get('/:username',isLoggedIn,function(req,res,next){
   var username = req.params.username;
+  var check =1;
+  if(username != req.user.username){
+    check = 0;
+  }
+  console.log("check "+ check);
     console.log('aaa');
-    User.findOne({'profile.userName': username},function(err,data){
+    User.findOne({'username': username},function(err,data){
       if(err) console.log(err);
       console.log(data);
-      Word.find({'owner': data.local.email},function(err,docs){
+      Word.find({'owner': data.username},function(err,docs){
         console.log(docs);
-        res.render('yourPage.ejs',{reqUser:req.user,user: data, docs:docs});
+        res.render('yourPage.ejs',{reqUser:req.user,user: data, docs:docs , check:check});
       })
-      // console.log(data.profile);
+      console.log(data.profile);
       
     })
  
 });
+router.post('/follow',isLoggedIn,function(req,res){
+  
+})
 
-router.post('/upLoad',function(req,res){
+router.post('/upLoad',isLoggedIn,function(req,res){
   console.log(req.body);
   console.log(req.user);
   console.log(req.user.local.email);
   var newWord = new Word();
     newWord.title = req.body.title;
     newWord.content = req.body.content;
-    newWord.owner = req.user.profile.fullName;
+    newWord.owner = req.user.username;
     newWord.soLike = 0;
     newWord.save(function(err) {
             if (err)
               throw err;
           });
-  res.redirect('/users/'+req.user.profile.userName);
+  res.redirect('/users/'+req.user.username);
 })
 router.post('/updateProfile',isLoggedIn,function(req,res){
    console.log("data :" + req.body);
@@ -96,7 +104,7 @@ router.post('/updateProfile',isLoggedIn,function(req,res){
          console.log("luu du lieu thanh cong");
        });
   });
-  res.redirect('/users/'+req.user.profile.userName);
+  res.redirect('/users/'+req.user.username);
 })
 
 router.post('/changePassword',isLoggedIn,function(req,res){

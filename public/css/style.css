@@ -1,7 +1,7 @@
 
-a {
+/*a {
   color: #00B7FF;
-}
+}*/
 /*index.ejs*/
 /*header*/
 header {
@@ -68,4 +68,6 @@ header .intro-text .intro-heading {
 	text-align: center;
 	margin-top:20px;
 }
-
+/*a{
+  text-decoration: none;
+}*/
