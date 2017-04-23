@@ -11,14 +11,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
-var mongoose = require('mongoose');
 var flash = require('connect-flash');
 var session = require('express-session');
-
-var configDB = require('./config/database.js');
-mongoose.connect(configDB.url);
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -30,6 +24,8 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var mongoose = require('mongoose');
 require('./config/passport')(passport);
+var configDB = require('./config/database.js');
+mongoose.connect(configDB.url);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
