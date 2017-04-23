@@ -108,7 +108,7 @@ router.post('/updateProfile', isLoggedIn, function (req, res) {
   var city = req.body.city;
   var age = req.body.age;
   var job = req.body.job;
-  var userName = req.body.userName;
+  var username = req.body.username;
   var avatar = req.body.avatar;
   console.log(city);
   console.log(age);
@@ -121,15 +121,16 @@ router.post('/updateProfile', isLoggedIn, function (req, res) {
     console.log(result);
     result.profile.city = city;
     result.profile.age = age;
-    result.profile.userName = userName;
+    result.username = username;
     result.profile.job = job;
     result.profile.avatar = avatar;
     result.save(function (err) {
       if (err) throw err;
       console.log("luu du lieu thanh cong");
     });
+    res.redirect('/users/' + result.username);
   });
-  res.redirect('/users/' + req.user.username);
+  
 })
 
 router.post('/changePassword', isLoggedIn, function (req, res) {
