@@ -23,28 +23,28 @@ module.exports = function (passport) {
   });
 
   passport.use('local-signup', new LocalStrategy({
-      usernameField: 'email',
+      usernameField: 'username',
       passwordField: 'password',
       passReqToCallback: true,
-      fullnameField: 'fullname',
+      emailField: 'email',
     },
-    function (req, email, password, done) {
+    function (req, username, password, done) {
       process.nextTick(function () {
         User.findOne({
-          'local.email': email
+          'username': username
         }, function (err, user) {
           if (err)
             return done(err);
           if (user) {
             return done(null, false, {
-              message: 'That email is already in use.'
+              message: 'That username is already in use.'
             });
           } else {
-            console.log(email + " ");
+            console.log(username + " ");
             var newUser = new User();
-            newUser.local.email = email;
+            newUser.username = username;
             newUser.local.password = newUser.generateHash(password);
-            newUser.username = req.body.fullname;
+            newUser.email = req.body.email;
             newUser.save(function (err) {
               if (err)
                 throw err;
@@ -56,13 +56,13 @@ module.exports = function (passport) {
     }));
 
   passport.use('local-login', new LocalStrategy({
-      usernameField: 'email',
+      usernameField: 'username',
       passwordField: 'password',
       passReqToCallback: true,
     },
-    function (req, email, password, done) {
+    function (req, username, password, done) {
       User.findOne({
-        'local.email': email
+        'username': username
       }, function (err, user) {
         if (err)
           return done(err);
@@ -93,7 +93,7 @@ module.exports = function (passport) {
             newUser.facebook.id = profile.id;
             newUser.facebook.token = token;
             newUser.username = profile.name.givenName + ' ' + profile.name.familyName;
-            newUser.facebook.email = (profile.emails[0].value || '').toLowerCase();
+            newUser.email = (profile.emails[0].value || '').toLowerCase();
 
             newUser.save(function (err) {
               if (err)
@@ -123,8 +123,7 @@ module.exports = function (passport) {
             var newUser = new User();
             newUser.twitter.id = profile.id;
             newUser.twitter.token = token;
-            newUser.twitter.username = profile.username;
-            newUser.twitter.displayName = profile.displayName;
+            newUser.username = profile.username;
             newUser.save(function (err) {
               if (err)
                 throw err;

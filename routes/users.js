@@ -62,7 +62,6 @@ router.get('/:username', isLoggedIn, function (req, res, next) {
     check = 0;
   }
   console.log("check " + check);
-  console.log('aaa');
   User.findOne({
     'username': username
   }, function (err, data) {
@@ -112,9 +111,9 @@ router.post('/updateProfile', isLoggedIn, function (req, res) {
   var avatar = req.body.avatar;
   console.log(city);
   console.log(age);
-  console.log(req.user.local.email);
+  console.log(req.user.email);
   User.findOne({
-    'local.email': req.user.local.email
+    'username': req.user.username
   }, function (err, result) {
 
     if (err) throw err;
