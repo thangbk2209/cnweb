@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <title>Nền tảng chia sẻ kiến thức cho sinh viên</title>
     <link href="stylesheets/landing-page.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     <link href="stylesheets/bootstrap.min.css" rel="stylesheet">
 
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 </head>
 <style type="text/css">
-    .myBody{
+    .myBody {
         margin-top: 50px;
     }
 </style>
+
 <body>
 
     <!-- Navigation -->
@@ -28,15 +30,21 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand topnav" href="/users/posts"><h4>CN WEB</h4></a>
+                <a class="navbar-brand topnav" href="/users/posts">
+                    <h4>CN WEB</h4>
+                </a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                      <li><a href="/users/<%=user.profile.fullName%>"><%=user.profile.fullName%></a></li>
-                      <li><a href="/users/write">Write</a></li>
-                      <!-- <li><a href="/users/profile"><i class=" glyphicons glyphicons-cogwheel"></i></a></li> -->
-                      <li><a href="/users/logout">Log out</a></li>
+                    <li>
+                        <a href="/users/<%=user.profile.fullName%>">
+                            <%=user.profile.fullName%>
+                        </a>
+                    </li>
+                    <li><a href="/users/write">Write</a></li>
+                    <!-- <li><a href="/users/profile"><i class=" glyphicons glyphicons-cogwheel"></i></a></li> -->
+                    <li><a href="/users/logout">Log out</a></li>
 
                 </ul>
             </div>
@@ -44,30 +52,30 @@
         </div>
         <!-- /.container -->
     </nav>
-        <div class="intro-header myBody">
-            <div class="container">
+    <div class="intro-header myBody">
+        <div class="container">
 
-                <div class="text-center" ng-app = "upLoad" ng-controller = "up-load">
-                    <h1><span class="fa fa-sign-in"></span> Report</h1>
-                    <hr>
-                    <form action="/users/upLoad" method="post" name="" >
-                         <div class="form-group">   
-                              <label>Title</label>     
-                               <input type="text" name="title" class="form-control" ng-model="title" placeholder="Title"/>
-                               
-                        </div>
-                        <div class="form-group">
-                            <label>Content</label>
-                            <input type="text" class="form-control" name="content" ng-model="content" placeholder="Content"/>
-                        </div>
-                            <button type="Submit" class="btn btn-info" >Upload</button>
-                    </form>
-                </div>
+            <div class="text-center" ng-app="upLoad" ng-controller="up-load">
+                <h1><span class="fa fa-sign-in"></span> Report</h1>
+                <hr>
+                <form action="/users/upLoad" method="post" name="">
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" name="title" class="form-control" ng-model="title" placeholder="Title" />
 
+                    </div>
+                    <div class="form-group">
+                        <label>Content</label>
+                        <input type="text" class="form-control" name="content" ng-model="content" placeholder="Content" />
+                    </div>
+                    <button type="Submit" class="btn btn-info">Upload</button>
+                </form>
             </div>
+
         </div>
+    </div>
     <!-- jQuery -->
-   
+
 
     <script src="js/jquery.js"></script>
     <script type="text/javascript">
@@ -75,4 +83,5 @@
 
 
 </body>
+
 </html>

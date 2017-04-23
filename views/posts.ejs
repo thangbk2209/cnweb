@@ -18,13 +18,10 @@
 
     <!-- Custom CSS -->
     <style>
-    body {
-        padding-top: 70px;
-        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
-    }
-    a{
-
-    }
+        body {
+            padding-top: 70px;
+            /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+        }
     </style>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -54,11 +51,13 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                     <li class="hidden">
+                    <li class="hidden">
                         <a href="#page-top"></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="/users/<%=reqUser.username%>"><%=reqUser.username%></a>
+                        <a class="page-scroll" href="/users/<%=reqUser.username%>">
+                            <%=reqUser.username%>
+                        </a>
                     </li>
                     <li>
                         <a class="page-scroll" href="/users/write"> Viết bài</a>
@@ -66,7 +65,7 @@
                     <li>
                         <a class="page-scroll" href="/users/logout">Đăng xuất</a>
                     </li>
-                    
+
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -80,29 +79,33 @@
     <section id="">
         <div class="container">
             <div class="col-md-8">
-                    <ul class="">
+                <ul class="">
                     <% for(var i = 0; i < posts.length; i++ ){ %>
                         <li class="list-group-item" style="height:70px;">
 
                             <div class="col-md-10">
-                                <a href="/posts/<%= posts[i].id %>" style="text-decoration: none;" ><%= posts[i].title %></a>
+                                <a href="/posts/<%= posts[i].id %>" style="text-decoration: none;">
+                                    <%= posts[i].title %>
+                                </a>
                             </div>
                             <div class="col-md-2">
                                 <table class="text-center">
-                                    <tr>              
+                                    <tr>
                                         <th><label>  <%= posts[i].soLike %></label></th>
                                         <th><label> <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> | </label></th>
 
-                                        <th><label> <%= posts[i].soLike %></label></th>  
-                                        <th><label>  <i class="fa fa-bookmark" aria-hidden="true"></i></label></th>  
+                                        <th><label> <%= posts[i].soLike %></label></th>
+                                        <th><label>  <i class="fa fa-bookmark" aria-hidden="true"></i></label></th>
                                     </tr>
-                                 </table>
+                                </table>
                             </div>
                             <div class="col-md-10">
-                                <a href="/users/<%= posts[i].owner %>" style="text-decoration: none;" ><%= posts[i].owner %></a>
+                                <a href="/users/<%= posts[i].owner %>" style="text-decoration: none;">
+                                    <%= posts[i].owner %>
+                                </a>
                             </div>
                         </li>
-                    <% } %>
+                        <% } %>
                 </ul>
             </div>
             <div class="col-md-4">
@@ -111,25 +114,26 @@
                 </div>
                 <div class="col-md-7">
                     <div class="thong_tin_ca_nhan">
-                        <label>User name:</label> <%=reqUser.username%><br>
+                        <label>User name:</label>
+                        <%=reqUser.username%><br>
                     </div>
-                </div>   
+                </div>
                 <div class="col-md-6 col-md-offset-3  tt_fs">
                     <table class="text-center">
                         <tr>
-                            
+
                             <th><label>  Following  |  </label></th>
-                            <th><label>  Số bài  </label></th>  
+                            <th><label>  Số bài  </label></th>
                         </tr>
                         <tr>
-                           
-                            <td>  20  </td>
-                            <td> 12</td>   
+
+                            <td> 20 </td>
+                            <td> 12</td>
                         </tr>
                     </table>
                 </div>
             </div>
-            
+
         </div>
     </section>
     <footer>

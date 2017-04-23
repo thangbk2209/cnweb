@@ -1,55 +1,56 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Books Trading Club</title>
-    <!--link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/-->
-    <!-- <script src="/socket.io/socket.io.js"></script> -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/style.css" rel="stylesheet">
-    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+<head>
+  <meta charset="utf-8">
+  <title>Books Trading Club</title>
+  <!--link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/-->
+  <!-- <script src="/socket.io/socket.io.js"></script> -->
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/style.css" rel="stylesheet">
+  <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 </head>
-  <style type="text/css">
-  </style>
-  <body>
-   <div class="col-md-4 col-md-offset-4">
-      <div class="text-center">
-        <h1 class="page-header"> Login</h1>
-         <form action="/users/login" method="post" name="loginForm" ng-app="">
-         <div class="form-group">   
-              <label>Email</label> 
-              <span ng-show="loginForm.email.$error.email">
+<style type="text/css">
+
+</style>
+
+<body>
+  <div class="col-md-4 col-md-offset-4">
+    <div class="text-center">
+      <h1 class="page-header"> Login</h1>
+      <form action="/users/login" method="post" name="loginForm" ng-app="">
+        <div class="form-group">
+          <label>Email</label>
+          <span ng-show="loginForm.email.$error.email">
                  <div class="alert-danger" style="margin-bottom: 10px;"> Not a valid e-mail address</div>
-              </span>    
-               <input type="email" name="email" class="form-control" ng-model="text" placeholder="email"/>    
+              </span>
+          <input type="email" name="email" class="form-control" ng-model="text" placeholder="email" />
         </div>
         <div class="form-group">
-            <label>PassWord</label>
-            <input type="password" class="form-control" name="password" placeholder="password"/>
+          <label>PassWord</label>
+          <input type="password" class="form-control" name="password" placeholder="password" />
         </div>
-            <button class="btn btn-info">Log in</button>
-            
-            <hr>
-            <a href="/users/auth/facebook" class="btn btn-primary"><span class="fa fa-facebook"></span> Facebook</a>
-            <a href="/users/auth/twitter" class="btn btn-info"><span class="fa fa-twitter"></span> Twitter</a>
-            <a href="/users/auth/google" class="btn btn-info"><span class="fa fa-google"></span> Google</a>
-    </form>
-      </div>
-      <hr>
+        <button class="btn btn-info">Log in</button>
 
-      
-
-      <span class="fa fa-sign-in"> Don't have an account?<a href="/users/signup"> Signup</a></span>
-      <p>Or go <a href="/">home</a>.</p>
+        <hr>
+        <a href="/users/auth/facebook" class="btn btn-primary"><span class="fa fa-facebook"></span> Facebook</a>
+        <a href="/users/auth/twitter" class="btn btn-info"><span class="fa fa-twitter"></span> Twitter</a>
+        <a href="/users/auth/google" class="btn btn-info"><span class="fa fa-google"></span> Google</a>
+      </form>
     </div>
-     <script type="text/javascript">
-      
-        console.log('start')
-        
-     </script>
-  </body>
-  
-    
+    <hr>
+
+
+
+    <span class="fa fa-sign-in"> Don't have an account?<a href="/users/signup"> Signup</a></span>
+    <p>Or go <a href="/">home</a>.</p>
+  </div>
+  <script type="text/javascript">
+    console.log('start')
+  </script>
+</body>
+
+
 </html>

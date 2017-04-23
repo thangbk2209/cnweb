@@ -18,10 +18,10 @@
 
     <!-- Custom CSS -->
     <style>
-    body {
-        padding-top: 70px;
-        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
-    }
+        body {
+            padding-top: 70px;
+            /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+        }
     </style>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -51,11 +51,13 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                     <li class="hidden">
+                    <li class="hidden">
                         <a href="#page-top"></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="/users/<%=reqUser.username%>"><%=reqUser.username%></a>
+                        <a class="page-scroll" href="/users/<%=reqUser.username%>">
+                            <%=reqUser.username%>
+                        </a>
                     </li>
                     <li>
                         <a class="page-scroll" href="/users/write"> Viết bài</a>
@@ -63,7 +65,7 @@
                     <li>
                         <a class="page-scroll" href="/users/logout">Đăng xuất</a>
                     </li>
-                    
+
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -78,53 +80,59 @@
     <section id="">
         <div class="container">
             <div class="col-md-8">
-                <center><h3><%= doc.title %></h3></center><br>
+                <center>
+                    <h3>
+                        <%= doc.title %>
+                    </h3>
+                </center><br>
                 <div>
                     <%= doc.content %>
                 </div>
                 <div style="float:right;">
                     <div class="col-md-3">
                         <table class="text-center">
-                            <tr>              
+                            <tr>
                                 <th><label>  <%= doc.soLike %></label></th>
                                 <th><label> <i class="fa fa-thumbs-o-up" aria-hidden="true"></i></label></th>
 
-                                <th><label> <%= doc.soLike %></label></th>  
-                                <th><label>  <i class="fa fa-bookmark" aria-hidden="true"></i></label></th>  
-                            </tr>
-                         </table>
-                    </div>
-                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class= row>
-                    <div class="col-md-5">
-                        <img class="avatar" src=<%=user.profile.avatar%>>
-                    </div>
-                    <div class="col-md-7">
-                        <div class="thong_tin_ca_nhan">
-                             <a href="/users/<%=user.username%>" style="text-decoration: none;" ><%=user.username%></a>
-                        </div>
-                    </div> 
-                </div> 
-                <div class= row>
-                    <div class="col-md-5 col-md-offset-1 tt_fs">
-                        <table class="text-center">
-                            <tr>
-                                
-                                <th><label>  Following  |  </label></th>
-                                <th><label>  Số bài  </label></th>  
-                            </tr>
-                            <tr>
-                               
-                                <td>  20  </td>
-                                <td>  5   </td>   
+                                <th><label> <%= doc.soLike %></label></th>
+                                <th><label>  <i class="fa fa-bookmark" aria-hidden="true"></i></label></th>
                             </tr>
                         </table>
                     </div>
                 </div>
             </div>
-            
+            <div class="col-md-4">
+                <div class=r ow>
+                    <div class="col-md-5">
+                        <img class="avatar" src=<%=user.profile.avatar%>>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="thong_tin_ca_nhan">
+                            <a href="/users/<%=user.username%>" style="text-decoration: none;">
+                                <%=user.username%>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class=r ow>
+                    <div class="col-md-5 col-md-offset-1 tt_fs">
+                        <table class="text-center">
+                            <tr>
+
+                                <th><label>  Following  |  </label></th>
+                                <th><label>  Số bài  </label></th>
+                            </tr>
+                            <tr>
+
+                                <td> 20 </td>
+                                <td> 5 </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
     <hr>

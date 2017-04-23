@@ -1,81 +1,84 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8">
     <title>Books Trading Club</title>
     <!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/> -->
     <link href="../css/style.css" rel="stylesheet">
     <!-- <script src="/socket.io/socket.io.js"></script> -->
-     <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 </head>
 
-  </head>
-  <style type="text/css">
-  </style>
-  <body>
-  <div class="col-sm-4 col-sm-offset-4">
+</head>
+<style type="text/css">
 
-      <div class="text-center" ng-app = "signUp" ng-controller = "sign-up">
-        <h1><span class="fa fa-sign-in"></span> Signup</h1>
-        <hr>
-         <form action="/users/signup" method="post" name="signupForm" ng-app="">
-         <div class="form-group">   
-            <label>Email</label>  
-              <span ng-show="signupForm.email.$error.email">
-                <div class="alert-danger" style="margin-bottom: 10px;"> Not a valid e-mail address</div>
-            </span>     
-              <input type="email" name="email" class="form-control" ng-model="email" placeholder="email"/>
-               
-        </div>
-        <div class="form-group">
-            <label >Username</label>
-            <input type="text" class="form-control" name="fullname" ng-model="fullname" placeholder="username"/>
-        </div>
-        <div class="form-group">
-            <label>PassWord</label>
-            <input type="password" class="form-control" name="password" ng-model="password" placeholder="password"/>
-        </div>
-            <button class="btn btn-info" ng-click="register()" >Sign up</button>
+</style>
+
+<body>
+    <div class="col-sm-4 col-sm-offset-4">
+
+        <div class="text-center" ng-app="signUp" ng-controller="sign-up">
+            <h1><span class="fa fa-sign-in"></span> Signup</h1>
             <hr>
-            <p class="message">Have account ? <a href="/users/login">Login</a></p>
-            <p><a href="/">Home</a></p>
-    </form>
-      </div>
-      <hr>
+            <form action="/users/signup" method="post" name="signupForm" ng-app="">
+                <div class="form-group">
+                    <label>Email</label>
+                    <span ng-show="signupForm.email.$error.email">
+                <div class="alert-danger" style="margin-bottom: 10px;"> Not a valid e-mail address</div>
+            </span>
+                    <input type="email" name="email" class="form-control" ng-model="email" placeholder="email" />
+
+                </div>
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" class="form-control" name="fullname" ng-model="fullname" placeholder="username" />
+                </div>
+                <div class="form-group">
+                    <label>PassWord</label>
+                    <input type="password" class="form-control" name="password" ng-model="password" placeholder="password" />
+                </div>
+                <button class="btn btn-info" ng-click="register()">Sign up</button>
+                <hr>
+                <p class="message">Have account ? <a href="/users/login">Login</a></p>
+                <p><a href="/">Home</a></p>
+            </form>
+        </div>
+        <hr>
     </div>
-     <script type="text/javascript">
-        var app=angular.module('signUp',[]);
-        app.controller('sign-up', function($scope){
-         var data = {     
-                            email: $scope.email,
-                            password: $scope.password
-                        };
-                        
-        console.log(data);
-        $scope.register = function () {
-          console.log(data);
-            $http({
-                method: "POST",
-                url: "users/signup",
-                data: data
-            }).success(function (data) {
-                // if(data.data.message == "That email is already in use.") {
-                //     $scope.messageRegister = "That email is already in use.";
-                // } else {
-                //     $rootScope.user = data.data.local.email;
-                //     $location.path('/');
-                // };
-                console.log("controller");
-            }).error(function (err) {
-                alert("Unable to connect to the server.");
-            });
-          }
-         });
-     </script>
-  </body>
-  
-    
+    <script type="text/javascript">
+        var app = angular.module('signUp', []);
+        app.controller('sign-up', function ($scope) {
+            var data = {
+                email: $scope.email,
+                password: $scope.password
+            };
+
+            console.log(data);
+            $scope.register = function () {
+                console.log(data);
+                $http({
+                    method: "POST",
+                    url: "users/signup",
+                    data: data
+                }).success(function (data) {
+                    // if(data.data.message == "That email is already in use.") {
+                    //     $scope.messageRegister = "That email is already in use.";
+                    // } else {
+                    //     $rootScope.user = data.data.local.email;
+                    //     $location.path('/');
+                    // };
+                    console.log("controller");
+                }).error(function (err) {
+                    alert("Unable to connect to the server.");
+                });
+            }
+        });
+    </script>
+</body>
+
+
 </html>

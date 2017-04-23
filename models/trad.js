@@ -1,8 +1,8 @@
-var mongoose=require('mongoose');
+var mongoose = require('mongoose');
 
-var tradSchema=mongoose.Schema({
+var tradSchema = mongoose.Schema({
 	title: String,
 	owner: String
 });
 
-module.exports = mongoose.model('Trad',tradSchema);
+module.exports = mongoose.model('Trad', tradSchema);

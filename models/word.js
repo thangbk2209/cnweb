@@ -1,13 +1,13 @@
-var mongoose=require('mongoose');
+var mongoose = require('mongoose');
 
-var wordSchema=mongoose.Schema({
+var wordSchema = mongoose.Schema({
 	title: String,
 	owner: String,
 	content: String,
 	soLike: Number,
-	like:[{
+	like: [{
 		user: String
 	}]
 });
 
-module.exports = mongoose.model('Word',wordSchema);
+module.exports = mongoose.model('Word', wordSchema);

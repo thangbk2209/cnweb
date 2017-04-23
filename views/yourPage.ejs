@@ -18,10 +18,10 @@
 
     <!-- Custom CSS -->
     <style>
-    body {
-        padding-top: 70px;
-        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
-    }
+        body {
+            padding-top: 70px;
+            /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+        }
     </style>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -51,11 +51,13 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                     <li class="hidden">
+                    <li class="hidden">
                         <a href="#page-top"></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="/users/<%=reqUser.username%>"><%=reqUser.username%></a>
+                        <a class="page-scroll" href="/users/<%=reqUser.username%>">
+                            <%=reqUser.username%>
+                        </a>
                     </li>
                     <li>
                         <a class="page-scroll" href="/users/write"> Viết bài</a>
@@ -63,7 +65,7 @@
                     <li>
                         <a class="page-scroll" href="/users/logout">Đăng xuất</a>
                     </li>
-                    
+
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -71,78 +73,88 @@
         <!-- /.container -->
     </nav>
     <!-- Page Content -->
-   <section id="">
-        <div class="container"  ng-app="FollowApp" ng-controller="follow">
+    <section id="">
+        <div class="container" ng-app="FollowApp" ng-controller="follow">
             <div class="col-md-8">
-                 <ul class="">
+                <ul class="">
                     <% for(var i = 0; i < docs.length; i++ ){ %>
                         <li class="list-group-item" style="height:150px;">
 
                             <div class="col-md-10">
-                                <a href="/posts/<%= docs[i].id %>" style="text-decoration: none;" >
-                                    <h3><%= docs[i].title %></h3>
+                                <a href="/posts/<%= docs[i].id %>" style="text-decoration: none;">
+                                    <h3>
+                                        <%= docs[i].title %>
+                                    </h3>
                                 </a>
                             </div>
                             <div class="col-md-2" style=" padding-top:25px">
                                 <table class="text-center">
-                                    <tr>              
+                                    <tr>
                                         <th><label>  <%= docs[i].soLike %></label></th>
                                         <th><label> <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> | </label></th>
 
-                                        <th><label> <%= docs[i].soLike %></label></th>  
-                                        <th><label>  <i class="fa fa-bookmark" aria-hidden="true"></i></label></th>  
+                                        <th><label> <%= docs[i].soLike %></label></th>
+                                        <th><label>  <i class="fa fa-bookmark" aria-hidden="true"></i></label></th>
                                     </tr>
-                                 </table>
+                                </table>
                             </div>
                             <div class="col-md-10">
-                                <a href="/users/<%= docs[i].owner %>" style="text-decoration: none;" ><%= docs[i].owner %></a>
+                                <a href="/users/<%= docs[i].owner %>" style="text-decoration: none;">
+                                    <%= docs[i].owner %>
+                                </a>
                             </div>
                         </li>
-                    <% } %>
+                        <% } %>
                 </ul>
             </div>
             <div class="col-md-4">
-                <div class= row>
+                <div class=r ow>
                     <div class="col-md-5">
                         <img class="avatar" src=<%=user.profile.avatar%>>
                     </div>
                     <div class="col-md-7">
                         <div class="thong_tin_ca_nhan">
-                            <label>User name:</label> <%=user.username%><br>
-                            <label>Age: </label><%=user.profile.age%><br>
-                            <label>Adress: </label><%=user.profile.city%><br>
-                            <label>Job: </label><%=user.profile.job%>
+                            <label>User name:</label>
+                            <%=user.username%><br>
+                                <label>Age: </label>
+                                <%=user.profile.age%><br>
+                                    <label>Adress: </label>
+                                    <%=user.profile.city%><br>
+                                        <label>Job: </label>
+                                        <%=user.profile.job%>
                         </div>
-                    </div> 
-                </div> 
-                <div class= row>
+                    </div>
+                </div>
+                <div class=r ow>
                     <div class="col-md-5 col-md-offset-1 tt_fs">
                         <table class="text-center">
                             <tr>
-                                
+
                                 <th><label>  Following  |  </label></th>
-                                <th><label>  Số bài  </label></th>  
+                                <th><label>  Số bài  </label></th>
                             </tr>
                             <tr>
-                               
-                                <td>  20  </td>
-                                <td>  <%=docs.length%>  </td>   
+
+                                <td> 20 </td>
+                                <td>
+                                    <%=docs.length%>
+                                </td>
                             </tr>
                         </table>
                     </div>
-                     <div class="col-md-6">
-                             <%if(check == 1){%>
-                                 <label>
+                    <div class="col-md-6">
+                        <%if(check == 1){%>
+                            <label>
                                     <a href="/users/profile"><i class="fa fa-cog fa-spin fa-3x fa-fw"></i></a>
                                 </label>
-                          
+
                             <%}else{%>
                                 <button class="btn btn-info" ng-click="folow(reqUser.usename,user.username)">Follow</button>
-                            <%}%> 
+                                <%}%>
                     </div>
                 </div>
             </div>
-            
+
         </div>
     </section>
     <hr>
@@ -173,20 +185,25 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="../js/bootstrap.min.js"></script>
     <script type="text/javascript">
-         var app = angular.module("FollowApp",[]);
-         app.controller("follow",function($scope,$http){
-                $scope.follow = function(reqUser, user){
-                    console.log(reqUser + user );
-                              $http({
-                                method : "POST",
-                                url: "/follow",
-                                data: {reqUser: reqUser, user:user},
-                                headers: {'Content-Type': 'application/json'}
-                              }).then(function(data){
-                                $scope. = data.data;
-                              })
-                });
-         })
+        var app = angular.module("FollowApp", []);
+        app.controller("follow", function ($scope, $http) {
+            $scope.follow = function (reqUser, user) {
+                console.log(reqUser + user);
+                $http({
+                    method: "POST",
+                    url: "/follow",
+                    data: {
+                        reqUser: reqUser,
+                        user: user
+                    },
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then(function (data) {
+                    $scope. = data.data;
+                })
+            });
+        })
     </script>
 
 </body>
