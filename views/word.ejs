@@ -74,67 +74,66 @@
     </nav>
     <!-- Page Content -->
 
-    <div class="container">
-
-    </div>
-    <section id="">
-        <div class="container">
-            <div class="col-md-8">
-                <center>
-                    <h3>
-                        <%= doc.title %>
-                    </h3>
-                </center><br>
-                <div>
-                    <%= doc.content %>
-                </div>
-                <div style="float:right;">
-                    <div class="col-md-3">
-                        <table class="text-center">
-                            <tr>
-                                <th><label>  <%= doc.soLike %></label></th>
-                                <th><label> <i class="fa fa-thumbs-o-up" aria-hidden="true"></i></label></th>
-
-                                <th><label> <%= doc.soLike %></label></th>
-                                <th><label>  <i class="fa fa-bookmark" aria-hidden="true"></i></label></th>
-                            </tr>
-                        </table>
+    <div  ng-app="likeApp" ng-controller="like">
+        <section id="">
+            <div class="container">
+                <div class="col-md-8">
+                    <center>
+                        <h3>
+                            <%= doc.title %>
+                        </h3>
+                    </center><br>
+                    <div>
+                        <%= doc.content %>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="row">
-                    <div class="col-md-5">
-                        <img class="avatar" src=<%=user.profile.avatar%>>
-                    </div>
-                    <div class="col-md-7">
-                        <div class="thong_tin_ca_nhan">
-                            <a href="/users/<%=user.username%>" style="text-decoration: none;">
-                                <%=user.username%>
-                            </a>
+                    <div style="float:right;">
+                        <div class="col-md-3">
+                            <table class="text-center">
+                                <tr>
+                                    <th><label>  <%= doc.soLike %></label></th>
+                                    <th><label> <i class="fa fa-thumbs-o-up" aria-hidden="true"></i></label></th>
+
+                                    <th><label> <%= doc.soCmt %></label></th>
+                                    <th><label>  <i class="fa fa-bookmark" aria-hidden="true"></i></label></th>
+                                </tr>
+                            </table>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-5 col-md-offset-1 tt_fs">
-                        <table class="text-center">
-                            <tr>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <img class="avatar" src=<%=user.profile.avatar%>>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="thong_tin_ca_nhan">
+                                <a href="/users/<%=user.username%>" style="text-decoration: none;">
+                                    <%=user.username%>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5 col-md-offset-1 tt_fs">
+                            <table class="text-center">
+                                <tr>
 
-                                <th><label>  Following  |  </label></th>
-                                <th><label>  Số bài  </label></th>
-                            </tr>
-                            <tr>
+                                    <th><label>  Following  |  </label></th>
+                                    <th><label>  Số bài  </label></th>
+                                </tr>
+                                <tr>
 
-                                <td> 20 </td>
-                                <td> 5 </td>
-                            </tr>
-                        </table>
+                                    <td> 20 </td>
+                                    <td> 5 </td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-        </div>
-    </section>
+            </div>
+        </section>
+    </div>
     <hr>
     <footer>
         <div class="container">
@@ -162,6 +161,29 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        var app = angular.module('likeApp', []);
+        app.controller("like", function ($scope, $http) {
+            $http.get("/yourPage").then(function(result) {
+                console.log('startaaa');
+                console.log(result);
+                $scope.myPosts = result.data;
+            }); 
+            
+            $scope.delPosts = function(id,owner){
+                console.log(id);
+                $http({
+                method : "DELETE",
+                url: "/delPost",
+                data: {id: id,owner:owner},
+                headers: {'Content-Type': 'application/json'}
+              }).then(function(data){
+                $scope.myPosts = data.data;
+                })
+            }
+
+        })
+    </script>
 
 </body>
 

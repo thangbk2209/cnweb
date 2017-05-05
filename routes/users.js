@@ -15,10 +15,10 @@ router.get('/', function (req, res, next) {
 router.get('/posts', function (req, res, next) {
   Word.find({}, function (err, data) {
     console.log(data);
+    console.log(req.user);
     res.render('posts.ejs', {
       message: req.flash('loginMessage'),
       reqUser: req.user,
-      posts: data
     });
   });
 
@@ -83,10 +83,6 @@ router.get('/:username', isLoggedIn, function (req, res, next) {
   })
 
 });
-router.post('/follow', isLoggedIn, function (req, res) {
-
-})
-
 router.post('/upLoad', isLoggedIn, function (req, res) {
   console.log(req.body);
   console.log(req.user);
@@ -96,10 +92,17 @@ router.post('/upLoad', isLoggedIn, function (req, res) {
   newWord.content = req.body.content;
   newWord.owner = req.user.username;
   newWord.soLike = 0;
+  newWord.soCmt = 0;
   newWord.save(function (err) {
     if (err)
       throw err;
   });
+  User.findOne({username: req.user.username},function(err,docs){
+    docs.profile.words.push({'title': req.body.title});
+    docs.save(function(err){
+      if(err) console.log('chua them duoc bai viet moi.');
+    })
+  })
   res.redirect('/users/' + req.user.username);
 })
 router.post('/updateProfile', isLoggedIn, function (req, res) {
@@ -107,7 +110,7 @@ router.post('/updateProfile', isLoggedIn, function (req, res) {
   var city = req.body.city;
   var age = req.body.age;
   var job = req.body.job;
-  var username = req.body.username;
+  // var username = req.body.username;
   var avatar = req.body.avatar;
   console.log(city);
   console.log(age);
@@ -120,7 +123,7 @@ router.post('/updateProfile', isLoggedIn, function (req, res) {
     console.log(result);
     result.profile.city = city;
     result.profile.age = age;
-    result.username = username;
+    // result.username = username;
     result.profile.job = job;
     result.profile.avatar = avatar;
     result.save(function (err) {

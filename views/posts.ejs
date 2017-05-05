@@ -34,7 +34,7 @@
 </head>
 
 <body>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container-fluid">
@@ -73,69 +73,76 @@
         <!-- /.container -->
     </nav>
     <!-- Page Content -->
-    <div class="container">
+    <div  ng-app="postsApp" ng-controller="posts">
+             
+        <section id="">
+            <div class="container" >
+                <div class="col-md-8" >
+                    <ul class="">
+                            <li class="list-group-item" style="height:150px;" ng-repeat="a in Posts">    
+                                <a style="text-decoration: none;" href="/posts/{{a._id}}"><h3>{{a.title}}</h3> </a>               
+                                
+                                <div class="col-md-2" style=" padding-top:25px">
+                                    <table class="text-center">
+                                        <tr>
+                                            <th><label >  {{a.soLike}}</label></th>
+                                            <th><label ng-click=like(a._id);> <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> | </label></th>
 
-    </div>
-    <section id="">
-        <div class="container">
-            <div class="col-md-8">
-                <ul class="">
-                    <% for(var i = 0; i < posts.length; i++ ){ %>
-                        <li class="list-group-item" style="height:70px;">
-
-                            <div class="col-md-10">
-                                <a href="/posts/<%= posts[i].id %>" style="text-decoration: none;">
-                                    <%= posts[i].title %>
-                                </a>
-                            </div>
-                            <div class="col-md-2">
-                                <table class="text-center">
-                                    <tr>
-                                        <th><label>  <%= posts[i].soLike %></label></th>
-                                        <th><label> <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> | </label></th>
-
-                                        <th><label> <%= posts[i].soLike %></label></th>
-                                        <th><label>  <i class="fa fa-bookmark" aria-hidden="true"></i></label></th>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="col-md-10">
-                                <a href="/users/<%= posts[i].owner %>" style="text-decoration: none;">
-                                    <%= posts[i].owner %>
-                                </a>
-                            </div>
-                        </li>
-                        <% } %>
-                </ul>
-            </div>
-            <div class="col-md-4">
-                <div class="col-md-5">
-                    <img class="avatar" src=<%=reqUser.profile.avatar%>>
+                                            <th><label> {{a.soCmt}}</label></th>
+                                            <th><label>  <i class="fa fa-bookmark" aria-hidden="true"></i></label></th>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <!-- <div class="col-md-10">
+                                    <a href="" style="text-decoration: none;">
+                                        {{a.owner}}
+                                    </a>
+                                </div> -->
+                            </li>
+                    </ul>
                 </div>
-                <div class="col-md-7">
-                    <div class="thong_tin_ca_nhan">
-                        <label>User name:</label>
-                        <%=reqUser.username%><br>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <img class="avatar" src=<%=reqUser.profile.avatar%>>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="thong_tin_ca_nhan">
+                                <label>User name:</label>
+                                <%=reqUser.username%><br>
+                                    <label>Age: </label>
+                                    <%=reqUser.profile.age%><br>
+                                        <label>Adress: </label>
+                                        <%=reqUser.profile.city%><br>
+                                            <label>Job: </label>
+                                            <%=reqUser.profile.job%>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-6 col-md-offset-3  tt_fs">
-                    <table class="text-center">
-                        <tr>
+                   <!--  <div class="row">
+                        <div class="col-md-5 col-md-offset-1 tt_fs">
+                            <table class="text-center">
+                                <tr>
 
-                            <th><label>  Following  |  </label></th>
-                            <th><label>  Số bài  </label></th>
-                        </tr>
-                        <tr>
+                                    <th><label>  Following  |  </label></th>
+                                    <th><label>  Số bài  </label></th>
+                                </tr>
+                                <tr>
 
-                            <td> 20 </td>
-                            <td> 12</td>
-                        </tr>
-                    </table>
+                                    <td> 20 </td>
+                                    <td>
+                                        <!-- {{myPosts.length}} -->
+                                        <!-- <%=reqUser.profile.words.length%> -->
+                          <!--           </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div> -->
                 </div>
+
             </div>
-
-        </div>
-    </section>
+        </section>
+    </div>
     <footer>
         <div class="container">
             <div class="row">
@@ -162,6 +169,29 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        var app = angular.module('postsApp', []);
+        app.controller("posts", function ($scope, $http) {
+            $http.get("/Page").then(function(result) {
+                console.log('startaaa');
+                console.log(result);
+                $scope.Posts = result.data;
+            }); 
+            $scope.like = function(id){
+                console.log(id);
+                // var liker = ;
+                // console.log(liker);
+                $http({
+                method : "POST",
+                url: "/likePost",
+                data: {id: id},
+                headers: {'Content-Type': 'application/json'}
+              }).then(function(data){
+                $scope.Posts = data.data;
+                })
+            }
+        })
+    </script>
 
 </body>
 

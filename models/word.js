@@ -5,8 +5,14 @@ var wordSchema = mongoose.Schema({
 	owner: String,
 	content: String,
 	soLike: Number,
+	soCmt: Number,
 	like: [{
-		user: String
+		user: String,
+		avatar: String,
+	}],
+	comment:[{
+		user: String,
+		cmt: String
 	}]
 });
 

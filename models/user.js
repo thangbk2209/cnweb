@@ -27,6 +27,9 @@ var userSchema = mongoose.Schema({
       id: mongoose.Schema.Types.ObjectId,
       avatar: String,
       name: String
+    }],
+    like: [{
+      title: String
     }]
   }
 });
