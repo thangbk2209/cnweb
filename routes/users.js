@@ -46,7 +46,9 @@ router.get('/profile', isLoggedIn, function (req, res) {
 
 router.get('/write', isLoggedIn, function (req, res, next) {
   res.render('write.ejs', {
-    reqUser: req.user
+    reqUser: req.user,
+    title: null,
+    content: null
   });
 });
 router.get('/logout', function (req, res) {

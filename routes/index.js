@@ -8,14 +8,24 @@ router.get('/', function (req, res, next) {
     message: req.flash('loginMessage')
   });
 });
-router.get('/yourPage', function (req, res, next) {
+router.get('/yourPage/:username', function (req, res, next) {
   console.log("start");
+  var username = req.params.username;
   console.log('req.user '+ req.user.username);
     Word.find({
-        'owner': req.user.username
+        'owner': username
       }, function (err, docs) {
            console.log(docs);
-            res.json(docs);
+            console.log('all doc= '+docs.length);
+           var result = [];
+           if(docs.length >=5){
+             for(var i = 1;i< 6;i++){
+                result.push(docs[docs.length-i]);
+             }
+                res.json(result);
+              }else{
+                res.json(docs);
+              }
         });
 })
 router.get('/Page', function (req, res, next) {
@@ -23,9 +33,28 @@ router.get('/Page', function (req, res, next) {
   console.log('req.user '+ req.user.username);
     Word.find({
       }, function (err, docs) {
-           console.log(docs);
-            res.json(docs);
+           console.log('all doc= '+docs.length);
+           var result = [];
+           if(docs.length >=5){
+             for(var i = 1;i< 6;i++){
+                result.push(docs[docs.length-i]);
+             }
+                res.json(result);
+              }else{
+                res.json(docs);
+              }
         });
+})
+router.post('/edit', function (req, res, next) {
+  console.log("start edit");
+  console.log(req.body.title);
+  console.log('req.user '+ req.user.username);
+    res.render('write.ejs', {
+      reqUser: req.user,
+      title: req.body.title,
+      content: req.body.content
+  });
+  // res.redirect('/users/write');
 })
 
 router.delete('/delPost',function(req,res,next){
