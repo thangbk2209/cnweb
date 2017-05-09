@@ -67,6 +67,12 @@
     .sub{
         margin-top: 20px; 
     }
+    .like-icon{
+        color: blue;
+    }
+    .unlike-icon{
+        color: #DDDDDD;
+    }
     </style>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -125,12 +131,12 @@
                 <div class="col-md-8" >
                     <ul class="">
                             <li class="list-group-item" style="height:150px;" ng-repeat="a in myPosts">    
-                                <a style="text-decoration: none;" href="/posts/{{a._id}}"><h3>{{a.title}}</h3> </a>               
+                                <a style="text-decoration: none;" href="/posts/{{a.id}}"><h3>{{a.title}}</h3> </a>               
                                     <%if(check == 1){%>
                                         <div>
                                              <button class="btn btn-danger" ng-click="delPosts(a._id,a.owner)">Delete</button>
 
-                                            <a href="/edit/{{a._id}}">
+                                            <a href="/edit/{{a.id}}">
                                                 <button class="btn btn-info" >Edit</button>
                                             </a> 
                                         </div>
@@ -142,7 +148,7 @@
                                     <table class="text-center">
                                         <tr>
                                             <th><label>  {{a.soLike}}</label></th>
-                                            <th><label ng-click=like(a._id,a.owner);> <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> | </label></th>
+                                            <th><label ng-class="a.isLike ? 'like-icon' : 'unlike-icon'"> <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> </label></th>
 
                                             <th><label> {{a.soCmt}}</label></th>
                                             <th><label>  <i class="fa fa-bookmark" aria-hidden="true"></i></label></th>

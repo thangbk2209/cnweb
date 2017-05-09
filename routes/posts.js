@@ -21,6 +21,7 @@ router.get('/:id', function (req, res, next) {
 			res.render('word.ejs', {
 				message: req.flash('loginMessage'),
 				reqUser: req.user,
+				// id: doc._id,
 				doc: doc,
 				content: content,
 				title: title,

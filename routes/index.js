@@ -12,30 +12,114 @@ router.get('/yourPage/:username', function (req, res, next) {
   console.log("start");
   var username = req.params.username;
   console.log('req.user '+ req.user.username);
-    Word.find({
-        'owner': username
+   Word.find({owner:username
       }, function (err, docs) {
-              console.log('all doc= '+docs.length);
+          console.log(docs);
+           console.log('all doc= '+docs.length);
            var result = [];
            var size = parseInt(docs.length/5);
            var du = parseInt(docs.length%5);
            console.log(du);
            console.log(size);
+           // Truong hop so bai viet nho hon 5
            if(size == 0){
-            // res.json(docs);
-            result.push(docs);
-            res.json(result);
+            for(var i = 0 ; i< docs.length;i++){
+              var isLike = false;
+              for(var j = 0 ; j < docs[i].like.length;j++){  
+                if(docs[i].like[j].user === req.user.username){
+                  isLike = true;
+                  break;
+                }
+              }
+              
+              result.push({
+                        id: docs[i]._id,
+                        owner: docs[i].owner,
+                        title: docs[i].title,
+                        content:docs[i].content,
+                        soLike: docs[i].soLike,
+                        soCmt: docs[i].soCmt,
+                        like: docs[i].like,
+                        isLike: isLike
+                    });
+            }
+            var abc=[];
+            abc.push(result);
+            res.json(abc);
            }
            else{
+            // Truong hop so bai viet lon hon 5
               for(var i = 0 ; i<= size ; i++){
                 var doc = [];
-                  if(i==size && du!=0){
-                    for(var j = 0 ; j<du ; j++){
-                      doc.push(docs[i*5+j]);
+                  if( du!=0){
+                    // Truong hop so bai viet chia cho 5 co gia tri du khac 0
+                    if(i==size){
+                      for(var j = 0 ; j<du ; j++){
+                          var isLike = false;
+                          for(var k = 0 ; k < docs[i*5+j].like.length;k++){
+                            
+                            if(docs[i*5+j].like[k].user === req.user.username){
+                              isLike = true;
+                              break;
+                            }
+                          }
+                          doc.push({
+                            id: docs[i*5+j]._id,
+                            owner: docs[i*5+j].owner,
+                            title: docs[i*5+j].title,
+                            content:docs[i*5+j].content,
+                            soLike: docs[i*5+j].soLike,
+                            soCmt: docs[i*5+j].soCmt,
+                            like: docs[i*5+j].like,
+                            isLike: isLike
+                          });
+                          // doc.push(docs[i*5+j]);
+                        }
+                    }else{
+                        for(var j= 0;j<5;j++){
+                        var isLike = false;
+                        for(var k = 0 ; k < docs[i*5+j].like.length;k++){                      
+                          if(docs[i*5+j].like[k].user === req.user.username){
+                            isLike = true;
+                            break;
+                          }
+                        }
+                        doc.push({
+                          id: docs[i*5+j]._id,
+                          owner: docs[i*5+j].owner,
+                          title: docs[i*5+j].title,
+                          soLike: docs[i*5+j].soLike,
+                          content:docs[i*5+j].content,
+                          soCmt: docs[i*5+j].soCmt,
+                          like: docs[i*5+j].like,
+                          isLike: isLike
+                        });
+                      }
                     }
                   }else{
-                    for(var j= 0;j<5;j++){
-                      doc.push(docs[i*5+j]);
+                    // Truong hop so bai viet chia cho 5 co gia tri du bang 0
+                    if(i==size){
+
+                    }else{
+                      for(var j= 0;j<5;j++){
+                        var isLike = false;
+                        for(var k = 0 ; k < docs[i*5+j].like.length;k++){                      
+                          if(docs[i*5+j].like[k].user === req.user.username){
+                            isLike = true;
+                            break;
+                          }
+                        }
+                        doc.push({
+                          id: docs[i*5+j]._id,
+                          owner: docs[i*5+j].owner,
+                          title: docs[i*5+j].title,
+                          content:docs[i*5+j].content,
+                          soLike: docs[i*5+j].soLike,
+                          soCmt: docs[i*5+j].soCmt,
+                          like: docs[i*5+j].like,
+                          isLike: isLike
+                        });
+                      }
                     }
                 }
                   result.push(doc);
@@ -43,7 +127,33 @@ router.get('/yourPage/:username', function (req, res, next) {
               }
               res.json(result);
            }
-        });
+        }); 
+})
+router.get('/word/:id',function(req,res,next){
+  console.log(req.params.id);
+  var id = req.params.id;
+  var result=[];
+  Word.findById(id, function(err,docs){
+              var isLike = false;     
+              for(var i=0 ; i<docs.like.length ; i++){        
+                  if(docs.like[i].user === req.user.username){
+                    isLike = true;
+                    break;
+                  } 
+              }
+              result.push({
+                        id: docs._id,
+                        owner: docs.owner,
+                        title: docs.title,
+                        content: docs.content,
+                        soLike: docs.soLike,
+                        soCmt: docs.soCmt,
+                        like: docs.like,
+                        isLike: isLike
+                    });
+              res.json(result);
+
+  })
 })
 router.get('/Page', function (req, res, next) {
   console.log("start");
@@ -193,7 +303,7 @@ router.delete('/delPost',function(req,res,next){
   });
 })
 router.post('/likePost',function(req,res,next){
-   console.log(req.body.id);
+   console.log('like ' + req.body.id);
    Word.findById(req.body.id,function(err,data){
       if(err) console.log(err);
       console.log(data);
@@ -202,121 +312,27 @@ router.post('/likePost',function(req,res,next){
         user: req.user.username,
         avatar: req.user.profile.avatar
       });
-      data.save(function(err){
+      data.save(function(err,docs){
         if(err) console.log(err);
-        Word.find({
-      }, function (err, docs) {
-          console.log(docs);
-           console.log('all doc= '+docs.length);
-           var result = [];
-           var size = parseInt(docs.length/5);
-           var du = parseInt(docs.length%5);
-           console.log(du);
-           console.log(size);
-           // Truong hop so bai viet nho hon 5
-           if(size == 0){
-            for(var i = 0 ; i< docs.length;i++){
-              var isLike = false;
-              for(var j = 0 ; j < docs[i].like.length;j++){  
-                if(docs[i].like[j].user === req.user.username){
-                  isLike = true;
-                  break;
-                }
-              }
-              
-              result.push({
-                        id: docs[i]._id,
-                        owner: docs[i].owner,
-                        title: docs[i].title,
-                        soLike: docs[i].soLike,
-                        soCmt: docs[i].soCmt,
-                        like: docs[i].like,
-                        isLike: isLike
-                    });
-            }
-            var abc=[];
-            abc.push(result);
-            console.log(abc);
-            res.json(abc);
-           }
-           else{
-            // Truong hop so bai viet lon hon 5
-              for(var i = 0 ; i<= size ; i++){
-                var doc = [];
-                  if( du!=0){
-                    // Truong hop so bai viet chia cho 5 co gia tri du khac 0
-                    if(i==size){
-                      for(var j = 0 ; j<du ; j++){
-                          var isLike = false;
-                          for(var k = 0 ; k < docs[i*5+j].like.length;k++){
-                            
-                            if(docs[i*5+j].like[k].user === req.user.username){
-                              isLike = true;
-                              break;
-                            }
-                          }
-                          doc.push({
-                            id: docs[i*5+j]._id,
-                            owner: docs[i*5+j].owner,
-                            title: docs[i*5+j].title,
-                            soLike: docs[i*5+j].soLike,
-                            soCmt: docs[i*5+j].soCmt,
-                            like: docs[i*5+j].like,
-                            isLike: isLike
-                          });
-                          // doc.push(docs[i*5+j]);
-                        }
-                    }else{
-                        for(var j= 0;j<5;j++){
-                        var isLike = false;
-                        for(var k = 0 ; k < docs[i*5+j].like.length;k++){                      
-                          if(docs[i*5+j].like[k].user === req.user.username){
-                            isLike = true;
-                            break;
-                          }
-                        }
-                        doc.push({
-                          id: docs[i*5+j]._id,
-                          owner: docs[i*5+j].owner,
-                          title: docs[i*5+j].title,
-                          soLike: docs[i*5+j].soLike,
-                          soCmt: docs[i*5+j].soCmt,
-                          like: docs[i*5+j].like,
-                          isLike: isLike
-                        });
-                      }
-                    }
-                  }else{
-                    // Truong hop so bai viet chia cho 5 co gia tri du bang 0
-                    if(i==size){
-
-                    }else{
-                      for(var j= 0;j<5;j++){
-                        var isLike = false;
-                        for(var k = 0 ; k < docs[i*5+j].like.length;k++){                      
-                          if(docs[i*5+j].like[k].user === req.user.username){
-                            isLike = true;
-                            break;
-                          }
-                        }
-                        doc.push({
-                          id: docs[i*5+j]._id,
-                          owner: docs[i*5+j].owner,
-                          title: docs[i*5+j].title,
-                          soLike: docs[i*5+j].soLike,
-                          soCmt: docs[i*5+j].soCmt,
-                          like: docs[i*5+j].like,
-                          isLike: isLike
-                        });
-                      }
-                    }
-                }
-                  result.push(doc);
-
-              }
-              res.json(result);
-           }
-        });
+        console.log('Luu thanh cong');
+        // var result=[];
+        // var isLike = false;   
+        //       for(var i=0;i<docs.like.length ; i++){          
+        //               if(docs.like[i].user === req.user.username){
+        //                 isLike = true;
+        //                 break;
+        //               }
+        //       }
+        //       result.push({
+        //                 id: docs._id,
+        //                 owner: docs.owner,
+        //                 title: docs.title,
+        //                 soLike: docs.soLike,
+        //                 soCmt: docs.soCmt,
+        //                 like: docs.like,
+        //                 isLike: isLike
+        //             });
+        //       res.json(result);
       })
 
    })
@@ -325,108 +341,41 @@ router.post('/likePost',function(req,res,next){
 router.post('/unlikePost',function(req,res,next){
   console.log(req.user.username);
    console.log(req.body.id);
-   Word.findById(req.body.id,function(err,data){
+    Word.findById(req.body.id,function(err,data){
       if(err) console.log(err);
-      // console.log(data.like);
+      console.log(data);
       data.soLike-=1;
-
       for(var i = 0 ; i< data.like.length ;i++){
         console.log(data.like[i]);
-        if(data.like[i].username == req.user.username){
+        if(data.like[i].user == req.user.username){
           data.like.splice(i,1);
           console.log('data.like'+data.like);
           
         }
       }
-      data.save(function(err){
+      data.save(function(err,docs){
         if(err) console.log(err);
-        Word.find({
-      }, function (err, docs) {
-           console.log('all doc= '+docs.length);
-           var result = [];
-           var size = parseInt(docs.length/5);
-           var du = parseInt(docs.length%5);
-           console.log(du);
-           console.log(size);
-           // Truong hop so bai viet nho hon 5
-           if(size == 0){
-            for(var i = 0 ; i< docs.length;i++){
-              var isLike = false;
-              for(var j = 0 ; j < docs[i].like.length;j++){  
-                if(docs[i].like[j].user === req.user.username){
-                  isLike = true;
-                  break;
-                }
-              }
-              
-              result.push({
-                        id: docs[i]._id,
-                        owner: docs[i].owner,
-                        title: docs[i].title,
-                        soLike: docs[i].soLike,
-                        soCmt: docs[i].soCmt,
-                        like: docs[i].like,
-                        isLike: isLike
-                    });
-            }
-            res.json(result);
-           }
-           else{
-            // Truong hop so bai viet lon hon 5
-              for(var i = 0 ; i<= size ; i++){
-                var doc = [];
-                  if(i==size && du!=0){
-                    // Truong hop so bai viet chia cho 5 co gia tri du khac 0
-                    for(var j = 0 ; j<du ; j++){
-                      var isLike = false;
-                      for(var k = 0 ; k < docs[i*5+j].like.length;k++){
-                        
-                        if(docs[i*5+j].like[k].user === req.user.username){
-                          isLike = true;
-                          break;
-                        }
-                      }
-                      doc.push({
-                        id: docs[i*5+j]._id,
-                        owner: docs[i*5+j].owner,
-                        title: docs[i*5+j].title,
-                        soLike: docs[i*5+j].soLike,
-                        soCmt: docs[i*5+j].soCmt,
-                        like: docs[i*5+j].like,
-                        isLike: isLike
-                    });
-                      // doc.push(docs[i*5+j]);
-                    }
-                  }else{
-                    // Truong hop so bai viet chia cho 5 co gia tri du bang 0
-                    for(var j= 0;j<5;j++){
-                      var isLike = false;
-                      for(var k = 0 ; k < docs[i*5+j].like.length;k++){
-                        
-                        if(docs[i*5+j].like[k].user === req.user.username){
-                          isLike = true;
-                          break;
-                        }
-                      }
-                      doc.push({
-                        id: docs[i*5+j]._id,
-                        owner: docs[i*5+j].owner,
-                        title: docs[i*5+j].title,
-                        soLike: docs[i*5+j].soLike,
-                        soCmt: docs[i*5+j].soCmt,
-                        like: docs[i*5+j].like,
-                        isLike: isLike
-                    });
-                    }
-                }
-                  result.push(doc);
-
-              }
-              res.json(result);
-           }
-        });
+        console.log('Luu thanh cong');
+      //   var result=[];
+      //   var isLike = false;   
+      //         for(var i=0;i<docs.like.length ; i++){          
+      //                 if(docs.like[i].user === req.user.username){
+      //                   isLike = true;
+      //                   break;
+      //                 }
+      //         }
+      //         result.push({
+      //                   id: docs._id,
+      //                   owner: docs.owner,
+      //                   title: docs.title,
+      //                   soLike: docs.soLike,
+      //                   soCmt: docs.soCmt,
+      //                   like: docs.like,
+      //                   isLike: isLike
+      //               });
+      //         res.json(result);
       })
-      
+
    })
     
 })

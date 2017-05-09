@@ -127,13 +127,13 @@
                 <div class="col-md-8" >
                     <ul class="">
                             <li class="list-group-item" style="height:150px;" ng-repeat="a in Posts">    
-                                <a style="text-decoration: none;" href="/posts/{{a._id}}"><h3>{{a.title}}</h3> </a>               
+                                <a style="text-decoration: none;" href="/posts/{{a.id}}"><h3>{{a.title}}</h3> </a>               
                                 
                                 <div class="col-md-2" style=" padding-top:25px">
                                     <table class="text-center">
                                         <tr>
                                             <th><label >  {{a.soLike}}</label></th>
-                                            <th><label ng-class="a.isLike ? 'like-icon' : 'unlike-icon'" ng-click=likeOrUnLike($index);> <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> | </label></th>
+                                            <th><label ng-class="a.isLike ? 'like-icon' : 'unlike-icon'"<i class="fa fa-thumbs-o-up" aria-hidden="true"></i> | </label></th>
 
                                             <th><label> {{a.soCmt}}</label></th>
                                             <th><label>  <i class="fa fa-bookmark" aria-hidden="true"></i></label></th>
@@ -213,33 +213,6 @@
                     }            
                 $('.subprev').hide();
             }); 
-            $scope.likeOrUnLike = function(x){
-                console.log(x);
-                if($scope.Posts[x].isLike == true){
-                    // $scope.Posts[x].isLike == false;
-                    // $scope.Posts[x].soLike--;
-                    $http({
-                        method : "POST",
-                        url: "/unlikePost",
-                        data: {id: $scope.Posts[x].id },
-                        headers: {'Content-Type': 'application/json'}
-                    }).then(function(data){
-                        $scope.Posts = data.data[i];
-                    })
-
-                }else{
-                    // $scope.Posts[x].isLike == true;
-                    // $scope.Posts[x].soLike++;
-                    $http({
-                        method : "POST",
-                        url: "/likePost",
-                        data: {id: $scope.Posts[x].id },
-                        headers: {'Content-Type': 'application/json'}
-                    }).then(function(data){
-                        $scope.Posts = data.data[i];
-                    })
-                }
-            }
             $scope.next = function(){
                 i++;
                 console.log(i);
