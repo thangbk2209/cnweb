@@ -108,7 +108,7 @@ router.post('/upLoad', isLoggedIn, function (req, res) {
   res.redirect('/users/' + req.user.username);
 })
 router.post('/updateProfile', isLoggedIn, function (req, res) {
-  console.log("data :" + req.body);
+  // console.log("data :" + req.body);
   var city = req.body.city;
   var age = req.body.age;
   var job = req.body.job;
