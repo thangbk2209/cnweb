@@ -28,9 +28,6 @@ var userSchema = mongoose.Schema({
       avatar: String,
       name: String
     }],
-    like: [{
-      title: String
-    }]
   }
 });
 

@@ -22,6 +22,12 @@
             padding-top: 70px;
             /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
         }
+        .like-icon{
+            color: blue;
+        }
+        .unlike-icon{
+            color: #DDDDDD;
+        }
     </style>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -34,7 +40,7 @@
 </head>
 
 <body>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container-fluid">
@@ -79,22 +85,26 @@
             <div class="container">
                 <div class="col-md-8">
                     <center>
-                        <h3>
-                            <%- title %>
-                        </h3>
+                        <h1>
+                            {{Post.title}}
+                        </h1>
                     </center><br>
                     <div id="content">
-                        <%- content %>
+                        {{Post.content}}
                     </div>
                    
                     <div style="float:right;">
                         <div class="col-md-3">
                             <table class="text-center">
                                 <tr>
-                                    <th><label>  <%= doc.soLike %></label></th>
-                                    <th><label> <i class="fa fa-thumbs-o-up" aria-hidden="true"></i></label></th>
+                                    <th><label>  {{Post.soLike }}</label></th>
+                                    <th>
+                                        <label ng-class="Post.isLike ? 'like-icon' : 'unlike-icon'" ng-click="likeOrUnLike()"> 
+                                        <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 
+                                        </label>
+                                    </th>
 
-                                    <th><label> <%= doc.soCmt %></label></th>
+                                    <th><label> {{Post.soCmt }}</label></th>
                                     <th><label>  <i class="fa fa-bookmark" aria-hidden="true"></i></label></th>
                                 </tr>
                             </table>
@@ -125,7 +135,7 @@
                                 <tr>
 
                                     <td> 20 </td>
-                                    <td> 5 </td>
+                                    <!-- <td><%= user.profile.words.length%> </td> -->
                                 </tr>
                             </table>
                         </div>
@@ -165,12 +175,39 @@
     <script type="text/javascript">
         var app = angular.module('likeApp', []);
         app.controller("like", function ($scope, $http) {
-            $http.get("/yourPage").then(function(result) {
-                console.log('startaaa');
+            $http.get("/word/<%=doc._id%>").then(function(result) {
+                console.log('start show word!!!');
                 console.log(result);
-                $scope.myPosts = result.data;
+                $scope.Post = result.data[0];
             }); 
-            
+            $scope.likeOrUnLike = function(){
+                console.log('x');
+                if($scope.Post.isLike == true){
+                    $scope.Post.isLike = false;
+                    $scope.Post.soLike--;
+                    $http({
+                        method : "POST",
+                        url: "/unlikePost",
+                        data: {id: $scope.Post.id },
+                        headers: {'Content-Type': 'application/json'}
+                    }).then(function(data){
+                        console.log(data.data[0]);
+                        $scope.Post = data.data[0];
+                    })
+
+                }else{
+                    $scope.Post.isLike = true;
+                    $scope.Post.soLike++;
+                    $http({
+                        method : "POST",
+                        url: "/likePost",
+                        data: {id: $scope.Post.id },
+                        headers: {'Content-Type': 'application/json'}
+                    }).then(function(data){
+                        $scope.Post = data.data[0];
+                    })
+                }
+            }
             $scope.delPosts = function(id,owner){
                 console.log(id);
                 $http({
