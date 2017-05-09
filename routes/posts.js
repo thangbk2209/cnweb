@@ -3,6 +3,7 @@ var passport = require('passport');
 var User = require('../models/user.js');
 var Word = require('../models/word.js');
 var router = express.Router();
+var markdown = require( "markdown" ).markdown;
 router.get('/:id', function (req, res, next) {
 	var id = req.params.id;
 	console.log(id);
@@ -10,6 +11,8 @@ router.get('/:id', function (req, res, next) {
 	Word.findById(id, function (err, doc) {
 		if (err) console.log(err);
 		console.log(doc);
+		var content = markdown.toHTML(doc.content);
+		var title = doc.title;
 		User.findOne({
 			username: doc.owner
 		}, function (err, data) {
@@ -19,6 +22,8 @@ router.get('/:id', function (req, res, next) {
 				message: req.flash('loginMessage'),
 				reqUser: req.user,
 				doc: doc,
+				content: content,
+				title: title,
 				user: data
 			});
 		})
