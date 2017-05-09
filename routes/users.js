@@ -88,23 +88,35 @@ router.get('/:username', isLoggedIn, function (req, res, next) {
 router.post('/upLoad', isLoggedIn, function (req, res) {
   console.log(req.body);
   console.log(req.user);
-  console.log(req.user.local.email);
-  var newWord = new Word();
-  newWord.title = req.body.title;
-  newWord.content = req.body.content;
-  newWord.owner = req.user.username;
-  newWord.soLike = 0;
-  newWord.soCmt = 0;
-  newWord.save(function (err) {
-    if (err)
-      throw err;
-  });
-  User.findOne({username: req.user.username},function(err,docs){
-    docs.profile.words.push({'title': req.body.title});
-    docs.save(function(err){
-      if(err) console.log('chua them duoc bai viet moi.');
-    })
+  // console.log(req.user.local.email);
+  Word.find({title: req.body.title, owner: req.user.username},function(err,data){
+    if(data.length != 0){
+      data[0].title = req.body.title;
+      data[0].content = req.body.content;
+      data[0].save(function(err){
+        if(err) console.log(err);
+        console.log("update du lieu thanh cong!!!");
+      });
+    }else{
+      var newWord = new Word();
+      newWord.title = req.body.title;
+      newWord.content = req.body.content;
+      newWord.owner = req.user.username;
+      newWord.soLike = 0;
+      newWord.soCmt = 0;
+      newWord.save(function (err) {
+        if (err)
+          throw err;
+      });
+      User.findOne({username: req.user.username},function(err,docs){
+        docs.profile.words.push({'title': req.body.title});
+        docs.save(function(err){
+          if(err) console.log('chua them duoc bai viet moi.');
+        })
+      })
+    }
   })
+  
   res.redirect('/users/' + req.user.username);
 })
 router.post('/updateProfile', isLoggedIn, function (req, res) {
@@ -163,7 +175,7 @@ router.post('/changePassword', isLoggedIn, function (req, res) {
       res.redirect('/users')
     } else {
       console.log("sai mat khau");
-      res.redirect('/users/profile');
+      res.redirect('/users/posts');
     }
   });
 
