@@ -2,18 +2,18 @@
 
 module.exports = {
   'facebookAuth': {
-    'clientID': 1382644601795254,
-    'clientSecret': '25dc1744d5f6a826b55bf24f626b00e0',
-    'callbackURL': 'https://localhost:8081/users/auth/facebook/callback'
+    'clientID': 689318891276113,
+    'clientSecret': 'e8203566222ffd071d0cd75581ba7882',
+    'callbackURL': 'https://127.0.0.1:8081/users/auth/facebook/callback'
   },
   'twitterAuth': {
-    'consumerKey': 'LqH2WRMDwKjzUpsy97ICJvSVA',
-    'consumerSecret': 'PcAMeEGG2eiEu79aiR4mmMfP7G7JNr2xJpEEdULjeAecoxpTLc',
-    'callbackURL': 'http://127.0.0.1:8080/users/auth/twitter/callback'
+    'consumerKey': '	jALbhYHd89wbsHsN4SKvJPK98',
+    'consumerSecret': '	hbY4z2v13pDhPfwbaIkNH5Z2E8MSt7o5byEIWSVewEq5oCHNgM',
+    'callbackURL': 'http://127.0.0.1:8081/users/auth/twitter/callback'
   },
   'googleAuth': {
-    'clientID': 114658987392813466129,
-    'clientSecret': '6713bf4b08f17e53a95a25170eb701b68c9ab0e5',
+    'clientID': '59647147556-h22np51roejhjupr15m2kkvrs2grocpf.apps.googleusercontent.com',
+    'clientSecret': 'MoNG2IcCkph1bA2oCsVFc09m',
     'callbackURL': 'https://localhost:8081/users/auth/google/callback'
   }
 };
