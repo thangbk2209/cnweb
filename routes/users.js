@@ -209,8 +209,8 @@ router.get('/auth/facebook/callback', passport.authenticate('facebook', {
 router.get('/auth/twitter', passport.authenticate('twitter'));
 
 router.get('/auth/twitter/callback', passport.authenticate('twitter', {
-  successRedirect: '/users',
-  failureRedirect: '/users/login',
+  successRedirect: '/users/profile',
+  failureRedirect: '/home',
 }));
 
 
@@ -223,6 +223,10 @@ function isLoggedIn(req, res, next) {
   } else if (req.url == '/auth/facebook') {
     // NOTE: call the function returned to process the request
     passport.authenticate('facebook')(req, res, next);
+    return;
+  } else if (req.url == '/auth/twitter'){
+    // NOTE: call the function returned to process the request
+    passport.authenticate('twitter')(req, res, next);
     return;
   }
   res.redirect('/');
