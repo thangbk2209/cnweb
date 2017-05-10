@@ -15,7 +15,7 @@
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="../css/style.css" rel="stylesheet">
- 
+
 
     <!-- Custom CSS -->
     <style>
@@ -23,56 +23,61 @@
             padding-top: 70px;
             /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
         }
-        .remove{
-            float:right;
+
+        .remove {
+            float: right;
         }
+
         .button {
-      border-radius: 4px;
-      background-color: #00CCFF;
-      border: none;
-      color: #FFFFFF;
-      text-align: center;
-      font-size: 20px;
-      padding: 15px;
-      width: 150px;
-      transition: all 0.5s;
-      cursor: pointer;
-      margin: 5px;
-    }
+            border-radius: 4px;
+            background-color: #00CCFF;
+            border: none;
+            color: #FFFFFF;
+            text-align: center;
+            font-size: 20px;
+            padding: 15px;
+            width: 150px;
+            transition: all 0.5s;
+            cursor: pointer;
+            margin: 5px;
+        }
 
-    .button span {
-      cursor: pointer;
-      display: inline-block;
-      position: relative;
-      transition: 0.5s;
-    }
+        .button span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+        }
 
-    .button span:after {
-      content: '\00bb';
-      position: absolute;
-      opacity: 0;
-      top: 0;
-      /*right: -20px;*/
-      transition: 0.5s;
-    }
+        .button span:after {
+            content: '\00bb';
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            /*right: -20px;*/
+            transition: 0.5s;
+        }
 
-    .button:hover span {
-      padding-right: 20px;
-    }
+        .button:hover span {
+            padding-right: 20px;
+        }
 
-    .button:hover span:after {
-      opacity: 1;
-      right: 0;
-    }
-    .sub{
-        margin-top: 20px; 
-    }
-    .like-icon{
-        color: blue;
-    }
-    .unlike-icon{
-        color: #DDDDDD;
-    }
+        .button:hover span:after {
+            opacity: 1;
+            right: 0;
+        }
+
+        .sub {
+            margin-top: 20px;
+        }
+
+        .like-icon {
+            color: blue;
+        }
+
+        .unlike-icon {
+            color: #DDDDDD;
+        }
     </style>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -87,68 +92,71 @@
 <body>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <!-- Navigation -->
-       <nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container-fluid">
-    <div class="navbar-header">
-       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="/users/posts" style="margin-left: 20px;">TTNT</a>
-    </div>
-    <ul class="nav navbar-nav navbar-right" style="margin-right: 30px;">
-          <li ><a href="/users/posts">Trang chủ</a></li>
-          <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" ><%=reqUser.username%> <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                     <li><a href="/users/<%=reqUser.username%>">Trang cá nhân</a></li>
-                    <li class="active"><a href="/users/write">Viết bài</a></li>
-                </ul>
-          </li>
-          <li><a href="/users/logout"><span class="fa fa-sign-out"></span>Logout</a></li>
-    </ul>
-  </div>
-</nav>
+                <a class="navbar-brand" href="/users/posts" style="margin-left: 20px;">TTNT</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right" style="margin-right: 30px;">
+                <li><a href="/users/posts">Trang chủ</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <%=reqUser.username%> <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/users/<%=reqUser.username%>">Trang cá nhân</a></li>
+                        <li class="active"><a href="/users/write">Viết bài</a></li>
+                    </ul>
+                </li>
+                <li><a href="/users/logout"><span class="fa fa-sign-out"></span>Logout</a></li>
+            </ul>
+        </div>
+    </nav>
     <!-- Page Content -->
-    <div  ng-app="FollowApp" ng-controller="follow">
-             
-        <section id="">
-            <div class="container" >
-                <div class="col-md-8" >
-                    <ul class="">
-                            <li class="list-group-item" style="height:150px;" ng-repeat="a in myPosts">    
-                                <a style="text-decoration: none;" href="/posts/{{a.id}}"><h3>{{a.title}}</h3> </a>               
-                                    <%if(check == 1){%>
-                                        <div>
-                                             <button class="btn btn-danger" ng-click="delPosts(a._id,a.owner)">Delete</button>
+    <div ng-app="FollowApp" ng-controller="follow">
 
-                                            <a href="/edit/{{a.id}}">
-                                                <button class="btn btn-info" >Edit</button>
-                                            </a> 
-                                        </div>
-                                         
-                                        
-                                    <%}%>
-                                
-                                <h5>
-                                    <span>
+        <section id="">
+            <div class="container">
+                <div class="col-md-8">
+                    <ul class="">
+                        <li class="list-group-item" style="height:150px;" ng-repeat="a in myPosts">
+                            <a style="text-decoration: none;" href="/posts/{{a.id}}">
+                                <h3>{{a.title}}</h3>
+                            </a>
+                            <%if(check == 1){%>
+                                <div>
+                                    <button class="btn btn-danger" ng-click="delPosts(a._id,a.owner)">Delete</button>
+
+                                    <a href="/edit/{{a.id}}">
+                                        <button class="btn btn-info">Edit</button>
+                                    </a>
+                                </div>
+
+
+                                <%}%>
+
+                                    <h5>
+                                        <span>
                                         <span>{{a.soLike}}<label ng-class="a.isLike ? 'like-icon' : 'unlike-icon'"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> </label>
                                         </span> &nbsp; &nbsp;
                                         <span>{{a.soCmt}} <span class=""><i class="fa fa-comment-o" aria-hidden="true"></i></span>
                                         </span>
-                                    </span>
-                                </h5><br>
-                                <!-- <div class="col-md-10">
+                                        </span>
+                                    </h5><br>
+                                    <!-- <div class="col-md-10">
                                     <a href="" style="text-decoration: none;">
                                         {{a.owner}}
                                     </a>
                                 </div> -->
-                            </li>
+                        </li>
                     </ul>
-                    
-                        <button class="button subnext" ng-click="next()" style="float: right;"><span>Next </span></button>
-                        <button class="button subprev" ng-click="prev()" style="float: right;"><span>Prev </span></button>
+
+                    <button class="button subnext" ng-click="next()" style="float: right;"><span>Next </span></button>
+                    <button class="button subprev" ng-click="prev()" style="float: right;"><span>Prev </span></button>
                     <!-- <label ng-click="next()" >Next >></label> -->
                 </div>
                 <div class="col-md-4">
@@ -172,9 +180,9 @@
                     <div class="row">
                         <div class="col-md-5 col-md-offset-1 tt_fs">
                             <table class="text-center">
-                                    <label>  Số bài : {{myPosts.length}} </label>
+                                <label>  Số bài : {{myPosts.length}} </label>
 
-                                        
+
                         </div>
                         <div class="col-md-6">
                             <%if(check == 1){%>
@@ -222,114 +230,136 @@
     <script type="text/javascript">
         var app = angular.module('FollowApp', []);
         app.controller("follow", function ($scope, $http) {
-            var i=0;
-            $http.get("/yourPage/<%=user.username%>").then(function(result) {
+            var i = 0;
+            $http.get("/yourPage/<%=user.username%>").then(function (result) {
                 console.log('startaaa');
                 console.log(result);
                 $scope.myPosts = result.data[i];
-                 if(result.data.length ==1){
-                        $('.subnext').hide();
-                    }  
+                if (result.data.length == 1) {
+                    $('.subnext').hide();
+                }
                 $('.subprev').hide();
-            }); 
-            $scope.delPosts = function(id,owner){
+            });
+            $scope.delPosts = function (id, owner) {
                 console.log(id);
                 $http({
-                method : "DELETE",
-                url: "/delPost",
-                data: {id: id,owner:owner},
-                headers: {'Content-Type': 'application/json'}
-              }).then(function(data){
-                $scope.myPosts = data.data;
-                })
-            }
-            $scope.like = function(id,owner){
-                console.log(id);
-                console.log(owner);
-                $http({
-                method : "POST",
-                url: "/likePostmyPage",
-                data: {id: id, owner:owner},
-                headers: {'Content-Type': 'application/json'}
-              }).then(function(data){
-                    console.log('data: ' +data.data);
+                    method: "DELETE",
+                    url: "/delPost",
+                    data: {
+                        id: id,
+                        owner: owner
+                    },
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then(function (data) {
                     $scope.myPosts = data.data;
                 })
             }
-            $scope.edit = function(title,content){
+            $scope.like = function (id, owner) {
+                console.log(id);
+                console.log(owner);
+                $http({
+                    method: "POST",
+                    url: "/likePostmyPage",
+                    data: {
+                        id: id,
+                        owner: owner
+                    },
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then(function (data) {
+                    console.log('data: ' + data.data);
+                    $scope.myPosts = data.data;
+                })
+            }
+            $scope.edit = function (title, content) {
                 console.log(title);
                 console.log(content);
                 $http({
-                method : "POST",
-                url: "/edit",
-                data: {title: title, content:content},
-                headers: {'Content-Type': 'application/json'}
-              })
+                    method: "POST",
+                    url: "/edit",
+                    data: {
+                        title: title,
+                        content: content
+                    },
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
                 // .then(function(data){
                 //     console.log('data: ' +data.data);
                 //     $scope.myPosts = data.data;
                 // })
             }
-            $scope.follow = function(followed){
+            $scope.follow = function (followed) {
                 console.log(followed);
                 $http({
-                method : "POST",
-                url: "/follow",
-                data: {followed:followed},
-                headers: {'Content-Type': 'application/json'}
-              }).then(function(data){
-                    console.log('data: ' +data.data);
+                    method: "POST",
+                    url: "/follow",
+                    data: {
+                        followed: followed
+                    },
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then(function (data) {
+                    console.log('data: ' + data.data);
                     // $scope.myPosts = data.data;
                 })
             }
-            $scope.next = function(){
+            $scope.next = function () {
                 i++;
                 console.log(i);
                 // console.log(id);
                 $http({
-                method : "GET",
-                url: "/yourPage/<%=user.username%>",
-                data: {},
-                headers: {'Content-Type': 'application/json'}
-              }).then(function(data){
+                    method: "GET",
+                    url: "/yourPage/<%=user.username%>",
+                    data: {},
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then(function (data) {
                     $scope.myPosts = data.data[i];
-                    if(data.data.length ==1){
+                    if (data.data.length == 1) {
                         $('.subnext').hide();
                         $('.subprev').hide();
-                    }
-                    else{
-                        if( i > 0 && i<data.data.length-1){
+                    } else {
+                        if (i > 0 && i < data.data.length - 1) {
                             $('.subprev').show();
                             $('.subnext').show();
                         }
-                        if(i == data.data.length-1) {
+                        if (i == data.data.length - 1) {
                             $('.subnext').hide();
-                            $('.subprev').show();       
+                            $('.subprev').show();
                         }
                     }
                 })
             }
-            $scope.prev = function(){
-                i-=1;
+            $scope.prev = function () {
+                i -= 1;
                 console.log(i);
                 // console.log(id);
                 $http({
-                method : "GET",
-                url: "/yourPage/<%=user.username%>",
-                data: {},
-                headers: {'Content-Type': 'application/json'}
-              }).then(function(data){
-                $scope.myPosts = data.data[i];
-                    if( i > 0){
+                    method: "GET",
+                    url: "/yourPage/<%=user.username%>",
+                    data: {},
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then(function (data) {
+                    $scope.myPosts = data.data[i];
+                    if (i > 0) {
                         $('.subprev').show();
                         $('.subnext').show();
                     }
-                    if(i== data.data.length-1) {
+                    if (i == data.data.length - 1) {
                         $('.subprev').show();
                         $('.subnext').hide();
-                        
+
                     }
-                    if(i==0){
+                    if (i == 0) {
                         $('.subprev').hide();
                         $('.subnext').show();
                     }
