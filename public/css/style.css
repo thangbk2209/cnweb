@@ -68,6 +68,13 @@ header .intro-text .bounceInDown {
 	text-align: center;
 	margin-top:20px;
 }
+footer {
+          background-color: #ffffff;
+          padding: 25px;
+          position: fixed;
+          bottom: 0px;
+          width: 1010px;
+        }
 /*a{
   text-decoration: none;
 }*/

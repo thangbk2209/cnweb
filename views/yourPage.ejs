@@ -117,8 +117,11 @@
             <div class="container" >
                 <div class="col-md-8" >
                     <ul class="">
-                            <li class="list-group-item" style="height:150px;" ng-repeat="a in myPosts">    
-                                <a style="text-decoration: none;" href="/posts/{{a.id}}"><h3>{{a.title}}</h3> </a>               
+                            <li class="list-group-item" style="height:170px;" ng-repeat="a in myPosts">    
+                                <a style="text-decoration: none;" href="/posts/{{a.id}}"><h3>{{a.title}}</h3> </a> 
+                                <h5>
+                                    <span class="glyphicon glyphicon-time"></span> Đăng bởi {{a.owner}}, Sep 27, 2015.
+                                </h5>              
                                     <%if(check == 1){%>
                                         <div>
                                              <button class="btn btn-danger" ng-click="delPosts(a._id,a.owner)">Delete</button>
@@ -192,8 +195,8 @@
             </div>
         </section>
     </div>
-    <hr>
-    <footer>
+     <hr>
+    <footer style="">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
