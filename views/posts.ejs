@@ -83,42 +83,30 @@
 <body>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/users/posts">TTNT</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="hidden">
-                        <a href="#page-top"></a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="/users/<%=reqUser.username%>">
-                            <%=reqUser.username%>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="/users/write">Viết bài</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="/users/logout">Đăng xuất</a>
-                    </li>
-
+   
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="/users/posts" style="margin-left: 20px;">TTNT</a>
+    </div>
+    <ul class="nav navbar-nav navbar-right" style="margin-right: 30px;">
+          <li ><a href="#">Trang chủ</a></li>
+          <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" ><%=reqUser.username%> <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                     <li><a href="/users/<%=reqUser.username%>">Trang cá nhân</a></li>
+                    <li class="active"><a href="/users/write">Viết bài</a></li>
                 </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
+          </li>
+          <li><a href="/users/logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+    </ul>
+  </div>
+</nav>
     <!-- Page Content -->
     <div  ng-app="postsApp" ng-controller="posts">
              

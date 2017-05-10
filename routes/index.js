@@ -45,6 +45,8 @@ router.get('/yourPage/:username', function (req, res, next) {
             }
             var abc=[];
             abc.push(result);
+            
+            abc.push()
             res.json(abc);
            }
            else{
@@ -378,53 +380,6 @@ router.post('/unlikePost',function(req,res,next){
 
    })
     
-})
-router.post('/likePostmyPage',function(req,res,next){
-  console.log(req.body.id);
-  console.log(req.body.owner);
-  // console.log('user: '+user);
-  Word.findById(req.body.id, function (err,data) {
-      if (err){
-          console.log(err);
-      }
-        User.findOne({'username': data.owner },function(err,result){
-        console.log(result);
-        var test = 0;
-        for(var i = 0 ; i< result.profile.like.length;i++){
-            if(result.profile.like[i].title === data.title){
-              test = 1;
-              break;
-            }
-        }
-        console.log('test= ' +test);
-          if(test == 0){
-            result.profile.like.push({title: data.title});
-            result.save(function(err){
-              if(err) console.log(err);
-            })
-              data.soLike+=1;
-              data.like.push({user: req.user.username});
-              data.save(function(err){
-              if(err) console.log('chua them duoc nguoi like');
-               console.log('added liker!!! ');
-               Word.find({owner:req.body.owner},function(err,docs){
-                  res.json(docs);
-              });
-
-            });
-          }  
-      });
-    //   data.soLike+=1;
-    //   data.like.push({'user': req.user.username});
-    //   data.save(function(err){
-    //     if(err) console.log('chua them duoc nguoi like');
-    //      console.log('added liker!!! ');
-    //      Word.find({owner:req.body.owner},function(err,docs){
-    //     res.json(docs);
-    // })
-    // });
-  });
- 
 })
 module.exports = router;
 
