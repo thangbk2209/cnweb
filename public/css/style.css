@@ -21,14 +21,14 @@ header .intro-text {
   padding-top: 0px;
   padding-bottom: 50px;
 }
-header .intro-text .intro-lead-in {
+header .intro-text .bounceInUp {
   font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-style: italic;
   font-size: 22px;
   line-height: 22px;
   margin-bottom: 25px;
 }
-header .intro-text .intro-heading {
+header .intro-text .bounceInDown {
   font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-transform: uppercase;
   font-weight: 700;
@@ -41,14 +41,14 @@ header .intro-text .intro-heading {
     padding-top: 300px;
     padding-bottom: 200px;
   }
-  header .intro-text .intro-lead-in {
+  header .intro-text .bounceInUp {
     font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-style: italic;
     font-size: 40px;
     line-height: 40px;
     margin-bottom: 25px;
   }
-  header .intro-text .intro-heading {
+  header .intro-text .bounceInDown {
     font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
     text-transform: uppercase;
     font-weight: 700;
