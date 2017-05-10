@@ -136,7 +136,9 @@ router.get('/word/:id',function(req,res,next){
   var id = req.params.id;
   var result=[];
   Word.findById(id, function(err,docs){
-              var isLike = false;     
+    User.findById(req.user._id,function(err,data){
+      console.log('user comment: '+data);
+      var isLike = false;     
               for(var i=0 ; i<docs.like.length ; i++){        
                   if(docs.like[i].user === req.user.username){
                     isLike = true;
@@ -150,10 +152,14 @@ router.get('/word/:id',function(req,res,next){
                         content: docs.content,
                         soLike: docs.soLike,
                         soCmt: docs.soCmt,
+                        comment: docs.comment,
+                        reqUser: data,
                         like: docs.like,
                         isLike: isLike
                     });
               res.json(result);
+    })
+              
 
   })
 })
@@ -290,7 +296,26 @@ router.get('/edit/:id', function (req, res, next) {
   
   // res.redirect('/users/write');
 })
-
+router.post('/addCmt',function(req,res,next){
+  console.log(req.body.yourCmt);
+  Word.findById(req.body.id,function(err,data){
+    if(err) console.log(err);
+    data.soCmt++;
+    data.comment.push({
+      user: req.user.username,
+      avatar: req.user.profile.avatar,
+      cmt: req.body.yourCmt
+    });
+    data.save(function(err){
+      if(err) console.log(err);
+      console.log('Added cmt');
+    });
+    Word.find({},function(err,cmts){
+      if(err) console.log(err);
+      res.json(cmts);
+    });
+  })
+})
 router.delete('/delPost',function(req,res,next){
   console.log(req.body.id);
   // console.log(req.user.local.email);

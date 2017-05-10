@@ -44,75 +44,87 @@
 <body>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/users/posts">TTNT</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="hidden">
-                        <a href="#page-top"></a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="/users/<%=reqUser.username%>">
-                            <%=reqUser.username%>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="/users/write"> Viết bài</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="/users/logout">Đăng xuất</a>
-                    </li>
-
+       <nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="/users/posts" style="margin-left: 20px;">TTNT</a>
+    </div>
+    <ul class="nav navbar-nav navbar-right" style="margin-right: 30px;">
+          <li ><a href="/users/posts">Trang chủ</a></li>
+          <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" ><%=reqUser.username%> <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                     <li><a href="/users/<%=reqUser.username%>">Trang cá nhân</a></li>
+                    <li class="active"><a href="/users/write">Viết bài</a></li>
                 </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
+          </li>
+          <li><a href="/users/logout"><span class="fa fa-sign-out"></span>Logout</a></li>
+    </ul>
+  </div>
+</nav>
     <!-- Page Content -->
 
     <div ng-app="likeApp" ng-controller="like">
         <section id="">
             <div class="container">
-                <div class="col-md-8">
+                <div class="col-md-8" >
                     <center>
                         <h1>
                             {{Post.title}}
                         </h1>
                     </center><br>
                     <div id="content">
-                        <%- content %>
+                        {{Post.content}}
                     </div>
 
-                    <div style="float:right;">
-                        <div class="col-md-3">
-                            <table class="text-center">
-                                <tr>
-                                    <th><label>  {{Post.soLike }}</label></th>
-                                    <th>
-                                        <label ng-class="Post.isLike ? 'like-icon' : 'unlike-icon'" ng-click="likeOrUnLike()"> 
-                                        <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 
-                                        </label>
-                                    </th>
-
-                                    <th><label> {{Post.soCmt }}</label></th>
-                                    <th><label>  <i class="fa fa-bookmark" aria-hidden="true"></i></label></th>
-                                </tr>
-                            </table>
+                    <!-- <div style="float:right;"> -->
+                        <div class="col-md-2 col-md-offset-10">
+                                <h5>
+                                    <span>
+                                        <span>{{Post.soLike }}<label ng-class="Post.isLike ? 'like-icon' : 'unlike-icon'" ng-click="likeOrUnLike()">
+                                            <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 
+                                            </label>
+                                        </span> &nbsp; &nbsp;
+                                        <span>{{Post.soCmt}} <span class=""><i class="fa fa-comment-o" aria-hidden="true"></i></span>
+                                        </span>
+                                    </span>
+                                </h5><br>
                         </div>
-                    </div>
+                    <!-- </div> -->
+                    <h4>Comment:</h4>
+                        <form role="form">
+                          <div class="form-group">
+                            <textarea class="form-control" rows="3" value="" ng-model = 'comment' required></textarea>
+                          </div>
+                          <button type="submit" ng-click="addCmt();" class="btn btn-success">Submit</button>
+                        </form>
+                        <br><br>
+                        
+                        <p><span class="badge">{{Post.soCmt}}</span> Comments:</p><br>
+                        
+                        <!-- <div class="row"> -->
+                            <ul>
+                                <li class="list-group-item"  style="height:100px;" ng-repeat="cmt in Post.comment">
+                                    <!-- <div class="col-sm-2 text-center">
+                                    <img class="img-circle" height="65" width="65" alt="Avatar" >
+
+                                    </div> -->
+                                    <div class="col-sm-10">
+                                        <h4><a href="/users/{{cmt.user}}" style="text-decoration: none;">{{cmt.user}}</a> </h4>
+                                        <p>{{cmt.cmt}}</p>
+                                        <br>
+                                    </div>
+                                </li>
+                            </ul>
+                              
+                       <!-- </div> -->
                 </div>
+
                 <div class="col-md-4">
                     <div class="row">
                         <div class="col-md-5">
@@ -126,20 +138,11 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="col-md-4">
                     <div class="row">
-                        <div class="col-md-5 col-md-offset-1 tt_fs">
-                            <table class="text-center">
-                                <tr>
-
-                                    <th><label>  Following  |  </label></th>
-                                    <th><label>  Số bài  </label></th>
-                                </tr>
-                                <tr>
-
-                                    <td> 20 </td>
-                                    <!-- <td><%= user.profile.words.length%> </td> -->
-                                </tr>
-                            </table>
+                        <div class="col-md-3 col-md-offset-1" style="margin:20px;">
+                                    <label>  Số bài:<%= user.profile.words.length%>  </label> 
                         </div>
                     </div>
                 </div>
@@ -147,7 +150,7 @@
             </div>
         </section>
     </div>
-    <hr>
+    <!-- <hr> -->
     <footer>
         <div class="container">
             <div class="row">
@@ -218,22 +221,36 @@
                     })
                 }
             }
-            $scope.delPosts = function (id, owner) {
-                console.log(id);
+            $scope.addCmt = function () {
+                var yourCmt = $scope.comment;
+                var reqUser = $scope.Post.reqUser;
+                console.log('reqUser'+reqUser);
+                $scope.Post.soCmt++;
+                console.log(yourCmt);
+                $scope.Post.comment.push({
+                    cmt: yourCmt,
+                    user: reqUser.username,
+                    avatar:reqUser.profile.avatar
+                })
+                console.log($scope.Post.comment);
+                $scope.comment=' ';
                 $http({
-                    method: "DELETE",
-                    url: "/delPost",
+                    method: "POST",
+                    url: "/addCmt",
                     data: {
-                        id: id,
-                        owner: owner
+                        yourCmt: yourCmt,
+                        id: $scope.Post.id,
+                        iduser: $scope.Post.reqUser._id
                     },
                     headers: {
                         'Content-Type': 'application/json'
                     }
                 }).then(function (data) {
-                    $scope.myPosts = data.data;
+                    // $scope.myPosts = data.data;
+                    console.log(data.data);
                 })
             }
+            
 
         })
     </script>
