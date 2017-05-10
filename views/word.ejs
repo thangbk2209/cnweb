@@ -22,10 +22,12 @@
             padding-top: 70px;
             /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
         }
-        .like-icon{
+
+        .like-icon {
             color: blue;
         }
-        .unlike-icon{
+
+        .unlike-icon {
             color: #DDDDDD;
         }
     </style>
@@ -80,7 +82,7 @@
     </nav>
     <!-- Page Content -->
 
-    <div  ng-app="likeApp" ng-controller="like">
+    <div ng-app="likeApp" ng-controller="like">
         <section id="">
             <div class="container">
                 <div class="col-md-8">
@@ -90,9 +92,9 @@
                         </h1>
                     </center><br>
                     <div id="content">
-                        {{Post.content}}
+                        <%- content %>
                     </div>
-                   
+
                     <div style="float:right;">
                         <div class="col-md-3">
                             <table class="text-center">
@@ -175,48 +177,61 @@
     <script type="text/javascript">
         var app = angular.module('likeApp', []);
         app.controller("like", function ($scope, $http) {
-            $http.get("/word/<%=doc._id%>").then(function(result) {
+            $http.get("/word/<%=doc._id%>").then(function (result) {
                 console.log('start show word!!!');
                 console.log(result);
                 $scope.Post = result.data[0];
-            }); 
-            $scope.likeOrUnLike = function(){
+            });
+            $scope.likeOrUnLike = function () {
                 console.log('x');
-                if($scope.Post.isLike == true){
+                if ($scope.Post.isLike == true) {
                     $scope.Post.isLike = false;
                     $scope.Post.soLike--;
                     $http({
-                        method : "POST",
+                        method: "POST",
                         url: "/unlikePost",
-                        data: {id: $scope.Post.id },
-                        headers: {'Content-Type': 'application/json'}
-                    }).then(function(data){
+                        data: {
+                            id: $scope.Post.id
+                        },
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    }).then(function (data) {
                         console.log(data.data[0]);
                         $scope.Post = data.data[0];
                     })
 
-                }else{
+                } else {
                     $scope.Post.isLike = true;
                     $scope.Post.soLike++;
                     $http({
-                        method : "POST",
+                        method: "POST",
                         url: "/likePost",
-                        data: {id: $scope.Post.id },
-                        headers: {'Content-Type': 'application/json'}
-                    }).then(function(data){
+                        data: {
+                            id: $scope.Post.id
+                        },
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    }).then(function (data) {
                         $scope.Post = data.data[0];
                     })
                 }
             }
-            $scope.delPosts = function(id,owner){
+            $scope.delPosts = function (id, owner) {
                 console.log(id);
                 $http({
-                method : "DELETE",
-                url: "/delPost",
-                data: {id: id,owner:owner},
-                headers: {'Content-Type': 'application/json'}
-              }).then(function(data){
-                $scope.myPosts = data.data;
+                    method: "DELETE",
+                    url: "/delPost",
+                    data: {
+                        id: id,
+                        owner: owner
+                    },
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then(function (data) {
+                    $scope.myPosts = data.data;
                 })
             }
 

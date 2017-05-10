@@ -1,7 +1,6 @@
 var LocalStrategy = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 var TwitterStrategy = require('passport-twitter').Strategy;
-var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var User = require('../models/user');
 var configAuth = require('./auth.js');
 
@@ -124,6 +123,7 @@ module.exports = function (passport) {
             newUser.twitter.id = profile.id;
             newUser.twitter.token = token;
             newUser.username = profile.username;
+            newUser.profile.avatar = profile.photos[0].value;
             newUser.save(function (err) {
               if (err)
                 throw err;
