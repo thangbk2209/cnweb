@@ -78,6 +78,10 @@
         .unlike-icon {
             color: #DDDDDD;
         }
+        .activity{
+          float: right;
+          clear: both;
+        }
     </style>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -123,35 +127,30 @@
             <div class="container">
                 <div class="col-md-8">
                     <ul class="">
-                        <li class="list-group-item" style="height:150px;" ng-repeat="a in myPosts">
-                            <a style="text-decoration: none;" href="/posts/{{a.id}}">
-                                <h3>{{a.title}}</h3>
-                            </a>
-                            <%if(check == 1){%>
-                                <div>
-                                    <button class="btn btn-danger" ng-click="delPosts(a._id,a.owner)">Delete</button>
+                            <li class="list-group-item" style="height:170px;" ng-repeat="a in myPosts">    
+                                <a style="text-decoration: none;" href="/posts/{{a.id}}"><h3>{{a.title}}</h3> </a> 
+                                <%if(check == 1){%>
+                                        <div class = 'activity'>
+                                             <button class="btn btn-danger" ng-click="delPosts(a._id,a.owner)">Delete</button>
 
-                                    <a href="/edit/{{a.id}}">
-                                        <button class="btn btn-info">Edit</button>
-                                    </a>
-                                </div>
-
-
-                                <%}%>
-
+                                            <a href="/edit/{{a.id}}">
+                                                <button class="btn btn-info" >Edit</button>
+                                            </a> 
+                                        </div>
+                                         
+                                        
+                                    <%}%>
+                                <h5>
+                                    <span class="glyphicon glyphicon-time"></span> Đăng bởi {{a.owner}}, Sep 27, 2015.
+                                </h5>              
+                                    
+                                
                                     <h5>
-                                        <span>
                                         <span>{{a.soLike}}<label ng-class="a.isLike ? 'like-icon' : 'unlike-icon'"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> </label>
                                         </span> &nbsp; &nbsp;
                                         <span>{{a.soCmt}} <span class=""><i class="fa fa-comment-o" aria-hidden="true"></i></span>
                                         </span>
-                                        </span>
                                     </h5><br>
-                                    <!-- <div class="col-md-10">
-                                    <a href="" style="text-decoration: none;">
-                                        {{a.owner}}
-                                    </a>
-                                </div> -->
                         </li>
                     </ul>
 
@@ -177,18 +176,20 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-5 col-md-offset-1 tt_fs">
+                    <div class="">
+                        <div class="col-md-4 col-md-offset-1 tt_fs">
                             <table class="text-center">
                                 <label>  Số bài : {{myPosts.length}} </label>
 
 
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-7">
                             <%if(check == 1){%>
-                                <label>
-                                        <a href="/users/profile"><i class="fa fa-cog fa-spin fa-3x fa-fw"></i></a>
-                                    </label>
+                                
+                                        <a href="/users/profile" style="text-decoration: none;">
+                                            <label><i class="fa fa-cog"><span>Cập nhật hồ sơ</span></i></label>
+                                        </a>
+                                    
 
                                 <%}else{%>
                                     <button class="btn btn-info" ng-click=follow(myPosts[0].owner);>Follow</button>
@@ -200,8 +201,8 @@
             </div>
         </section>
     </div>
-    <hr>
-    <footer>
+     <hr>
+    <footer style="">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
