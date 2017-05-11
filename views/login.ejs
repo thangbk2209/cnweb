@@ -3,36 +3,110 @@
 
 <head>
   <meta charset="utf-8">
-  <title>TTNT</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Nền tảng chia sẻ kiến thức cho sinh viên</title>
   <!--link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/-->
   <!-- <script src="/socket.io/socket.io.js"></script> -->
   <link href="../css/bootstrap.min.css" rel="stylesheet">
   <link href="../css/style.css" rel="stylesheet">
   <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
-  <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+  <!--<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-</head>
-<style type="text/css">
+  
+  <style type="text/css">
+    body {
+      font-family: "Open Sans", sans-serif;
+      height: 100vh;
+      background: url("http://i.imgur.com/HgflTDf.jpg") 50% fixed;
+      background-size: cover;
+      color: white;
+    }
 
-</style>
+    form {
+      box-sizing: border-box;
+      width: 520px;
+      margin: 200px auto 0;
+      box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.2);
+      padding-bottom: 40px;
+      border-radius: 3px;
+      color: white;
+    }
+
+    form h1 {
+      box-sizing: border-box;
+      padding: 20px;
+    }
+
+    input {
+      margin: 40px 25px;
+      width: 480px;
+      display: block;
+      border: none;
+      padding: 10px 0;
+      border-bottom: solid 1px #1abc9c;
+      transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+      background: linear-gradient(to bottom,rgba(255, 255, 255, 0) 96%, #1abc9c 4%);
+      background-position: -480px 0;
+      background-size: 480px 100%;
+      background-repeat: no-repeat;
+      color: #0e6252;
+    }
+
+    input:focus,
+    input:valid {
+      box-shadow: none;
+      outline: none;
+      background-position: 0 0;
+    }
+
+    input:focus::-webkit-input-placeholder,
+    input:valid::-webkit-input-placeholder {
+      color: white;
+      font-size: 20px;
+      transform: translateY(-20px);
+      visibility: visible !important;
+    }
+
+    button {
+      border: none;
+      background: #1abc9c;
+      cursor: pointer;
+      border-radius: 3px;
+      padding: 6px;
+      width: 480px;
+      color: white;
+      margin-left: 25px;
+      box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2);
+    }
+  </style>
+</head>
 
 <body>
   <div class="col-md-4 col-md-offset-4">
     <div class="text-center">
-      <h1 class="page-header"> Login</h1>
+      
       <form action="/users/login" method="post" name="loginForm" ng-app="">
+        <h1> Login</h1>
         <div class="form-group">
-          <label>Username</label>
           <span ng-show="loginForm.email.$error.email">
                  <div class="alert-danger" style="margin-bottom: 10px;"> Not a valid username</div>
               </span>
-          <input type="text" name="username" class="form-control" ng-model="text" placeholder="username" />
+          <input type="text" name="username" ng-model="text" placeholder="Username" required=""/>
         </div>
         <div class="form-group">
-          <label>Password</label>
-          <input type="password" class="form-control" name="password" placeholder="password" />
+          <input type="password" name="password" placeholder="Password" required=""/>
         </div>
-        <button class="btn btn-info">Log in</button>
+        <button>Login</button>
 
         <hr>
         <a href="/users/auth/facebook" class="btn btn-primary"><span class="fa fa-facebook"></span> Facebook</a>
