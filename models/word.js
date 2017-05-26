@@ -6,6 +6,7 @@ var wordSchema = mongoose.Schema({
 	content: String,
 	soLike: Number,
 	soCmt: Number,
+	time: String,
 	like: [{
 		user: String,
 		avatar: String,

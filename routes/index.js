@@ -193,6 +193,7 @@ router.get('/Page', function (req, res, next) {
                         soLike: docs[i].soLike,
                         soCmt: docs[i].soCmt,
                         like: docs[i].like,
+                        time: docs[i].time,
                         isLike: isLike
                     });
             }
@@ -223,6 +224,7 @@ router.get('/Page', function (req, res, next) {
                             soLike: docs[i*5+j].soLike,
                             soCmt: docs[i*5+j].soCmt,
                             like: docs[i*5+j].like,
+                            time: docs[i*5+j].time,
                             isLike: isLike
                           });
                           // doc.push(docs[i*5+j]);
@@ -243,6 +245,7 @@ router.get('/Page', function (req, res, next) {
                           soLike: docs[i*5+j].soLike,
                           soCmt: docs[i*5+j].soCmt,
                           like: docs[i*5+j].like,
+                          time: docs[i*5+j].time,
                           isLike: isLike
                         });
                       }
@@ -267,6 +270,7 @@ router.get('/Page', function (req, res, next) {
                           soLike: docs[i*5+j].soLike,
                           soCmt: docs[i*5+j].soCmt,
                           like: docs[i*5+j].like,
+                          time: docs[i*5+j].time,
                           isLike: isLike
                         });
                       }
@@ -342,24 +346,7 @@ router.post('/likePost',function(req,res,next){
       data.save(function(err,docs){
         if(err) console.log(err);
         console.log('Luu thanh cong');
-        // var result=[];
-        // var isLike = false;   
-        //       for(var i=0;i<docs.like.length ; i++){          
-        //               if(docs.like[i].user === req.user.username){
-        //                 isLike = true;
-        //                 break;
-        //               }
-        //       }
-        //       result.push({
-        //                 id: docs._id,
-        //                 owner: docs.owner,
-        //                 title: docs.title,
-        //                 soLike: docs.soLike,
-        //                 soCmt: docs.soCmt,
-        //                 like: docs.like,
-        //                 isLike: isLike
-        //             });
-        //       res.json(result);
+
       })
 
    })
@@ -383,24 +370,6 @@ router.post('/unlikePost',function(req,res,next){
       data.save(function(err,docs){
         if(err) console.log(err);
         console.log('Luu thanh cong');
-      //   var result=[];
-      //   var isLike = false;   
-      //         for(var i=0;i<docs.like.length ; i++){          
-      //                 if(docs.like[i].user === req.user.username){
-      //                   isLike = true;
-      //                   break;
-      //                 }
-      //         }
-      //         result.push({
-      //                   id: docs._id,
-      //                   owner: docs.owner,
-      //                   title: docs.title,
-      //                   soLike: docs.soLike,
-      //                   soCmt: docs.soCmt,
-      //                   like: docs.like,
-      //                   isLike: isLike
-      //               });
-      //         res.json(result);
       })
 
    })

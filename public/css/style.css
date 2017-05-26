@@ -71,9 +71,9 @@ header .intro-text .bounceInDown {
 footer {
           background-color: #ffffff;
           padding: 25px;
-          position: fixed;
+          position: static;
           bottom: 0px;
-          width: 1010px;
+          width: auto;
         }
 /*a{
   text-decoration: none;

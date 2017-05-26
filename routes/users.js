@@ -88,6 +88,20 @@ router.get('/:username', isLoggedIn, function (req, res, next) {
 router.post('/upLoad', isLoggedIn, function (req, res) {
   console.log(req.body);
   console.log(req.user);
+  var date = Date.now();
+  var dateNow= new Date(date);
+  var months = ['Jan','Feb','Mar','Apr','May','June','Jul','Aug','Sep','Oct','Nov','Dec']
+   console.log('time'+ dateNow);
+   var day = dateNow.getDate();
+   var mon = months[dateNow.getMonth()];
+   var year = dateNow.getFullYear();
+   console.log('hehe');
+   console.log(day);
+   console.log(mon);
+   console.log(year);
+   var time = mon + " "+day+', '+year;
+   console.log(time);
+   
   // console.log(req.user.local.email);
   Word.find({title: req.body.title, owner: req.user.username},function(err,data){
     if(data.length != 0){
@@ -103,6 +117,7 @@ router.post('/upLoad', isLoggedIn, function (req, res) {
       newWord.content = req.body.content;
       newWord.owner = req.user.username;
       newWord.soLike = 0;
+      newWord.time = time;
       newWord.soCmt = 0;
       newWord.save(function (err) {
         if (err)
