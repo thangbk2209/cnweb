@@ -40,6 +40,7 @@ router.get('/yourPage/:username', function (req, res, next) {
                         soLike: docs[i].soLike,
                         soCmt: docs[i].soCmt,
                         like: docs[i].like,
+                        time: docs[i].time,
                         isLike: isLike
                     });
             }
@@ -73,6 +74,7 @@ router.get('/yourPage/:username', function (req, res, next) {
                             soLike: docs[i*5+j].soLike,
                             soCmt: docs[i*5+j].soCmt,
                             like: docs[i*5+j].like,
+                            time: docs[i*5+j].time,
                             isLike: isLike
                           });
                           // doc.push(docs[i*5+j]);
@@ -94,6 +96,7 @@ router.get('/yourPage/:username', function (req, res, next) {
                           content:docs[i*5+j].content,
                           soCmt: docs[i*5+j].soCmt,
                           like: docs[i*5+j].like,
+                          time: docs[i*5+j].time,
                           isLike: isLike
                         });
                       }
@@ -119,6 +122,7 @@ router.get('/yourPage/:username', function (req, res, next) {
                           soLike: docs[i*5+j].soLike,
                           soCmt: docs[i*5+j].soCmt,
                           like: docs[i*5+j].like,
+                          time: docs[i*5+j].time,
                           isLike: isLike
                         });
                       }
@@ -193,6 +197,7 @@ router.get('/Page', function (req, res, next) {
                         soLike: docs[i].soLike,
                         soCmt: docs[i].soCmt,
                         like: docs[i].like,
+                        time: docs[i].time,
                         isLike: isLike
                     });
             }
@@ -223,6 +228,7 @@ router.get('/Page', function (req, res, next) {
                             soLike: docs[i*5+j].soLike,
                             soCmt: docs[i*5+j].soCmt,
                             like: docs[i*5+j].like,
+                            time: docs[i*5+j].time,
                             isLike: isLike
                           });
                           // doc.push(docs[i*5+j]);
@@ -243,6 +249,7 @@ router.get('/Page', function (req, res, next) {
                           soLike: docs[i*5+j].soLike,
                           soCmt: docs[i*5+j].soCmt,
                           like: docs[i*5+j].like,
+                          time: docs[i*5+j].time,
                           isLike: isLike
                         });
                       }
@@ -267,6 +274,7 @@ router.get('/Page', function (req, res, next) {
                           soLike: docs[i*5+j].soLike,
                           soCmt: docs[i*5+j].soCmt,
                           like: docs[i*5+j].like,
+                          time: docs[i*5+j].time,
                           isLike: isLike
                         });
                       }
