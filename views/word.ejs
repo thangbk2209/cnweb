@@ -115,7 +115,10 @@
 
                                     </div> 
                                     <div class="col-sm-10">
-                                        <h4><a href="/users/{{cmt.user}}" style="text-decoration: none;">{{cmt.user}}</a> </h4>
+                                        <h4>
+                                            <a href="/users/{{cmt.user}}" style="text-decoration: none;">{{cmt.user}}</a>
+                                            <h6 style="float: right">{{cmt.time}}</h6>
+                                         </h4>
                                         <p>{{cmt.cmt}}</p>
                                         <br>
                                     </div>
@@ -222,6 +225,8 @@
                 }
             }
             $scope.addCmt = function () {
+                var dateNow= new Date().toLocaleString();
+                console.log('dateNow'+dateNow);
                 var yourCmt = $scope.comment;
                 var reqUser = $scope.Post.reqUser;
                 console.log('reqUser'+reqUser);
@@ -230,7 +235,8 @@
                 $scope.Post.comment.push({
                     cmt: yourCmt,
                     user: reqUser.username,
-                    avatar: reqUser.profile.avatar
+                    avatar: reqUser.profile.avatar,
+                    time: dateNow
                 })
                 console.log($scope.Post.comment);
                 $scope.comment=' ';
@@ -239,6 +245,7 @@
                     url: "/addCmt",
                     data: {
                         yourCmt: yourCmt,
+                        time: dateNow,
                         id: $scope.Post.id,
                         iduser: $scope.Post.reqUser._id
                     },

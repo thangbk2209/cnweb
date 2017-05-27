@@ -101,7 +101,6 @@ router.post('/upLoad', isLoggedIn, function (req, res) {
    console.log(year);
    var time = mon + " "+day+', '+year;
    console.log(time);
-   
   // console.log(req.user.local.email);
   Word.find({title: req.body.title, owner: req.user.username},function(err,data){
     if(data.length != 0){

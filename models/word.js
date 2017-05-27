@@ -14,7 +14,8 @@ var wordSchema = mongoose.Schema({
 	comment:[{
 		user: String,
 		avatar: String,
-		cmt: String
+		cmt: String,
+		time: String
 	}]
 });
 
